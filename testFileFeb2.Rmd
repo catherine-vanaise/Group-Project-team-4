@@ -10,3 +10,8 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 Making a test file
+
+```{r}
+mydata <- readr::read_csv("https://docs.google.com/spreadsheets/d/1eP9hgz5JiYZMEzwP2o1f0efDWyvOCvzV/edit#gid=649765724")
+```
+
