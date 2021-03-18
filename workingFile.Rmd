@@ -1,0 +1,18 @@
+---
+title: "Working File"
+author: "Catherine Vanaise"
+date: "02/02/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Loading the data
+
+```{r}
+library(gsheet)
+mydata <- gsheet2tbl("https://docs.google.com/spreadsheets/d/1zcYomqhibeLyxaeTyJz8etOqUWqDLH_4/edit#gid=550557869")
+```
+
