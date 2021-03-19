@@ -9,10 +9,93 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-Loading the data
-
 ```{r}
+#Loading the data
 library(gsheet)
 mydata <- gsheet2tbl("https://docs.google.com/spreadsheets/d/1zcYomqhibeLyxaeTyJz8etOqUWqDLH_4/edit#gid=550557869")
 ```
 
+We must first determine if we need a fixed-effects model to help remove the effects of time-invariant characteristics (such as the countries and years). If fixed-effects do affect the model, it is important to control for them to ensure that the model will then be truly measuring the impact of the independent variables on the dependent variable. 
+
+Below are the results of the Hausman Test performed on the data, determining whether the model should be fixed or random.
+
+```{r}
+if (!require("plm")) install.packages("plm")
+library(plm)
+# Running a panel data with fixed effects
+fixed <- plm(unemployment ~ primEduc + lowSecEduc + upSecEduc + longCycleTerEduc,
+             data = mydata, index = c("country", "year"), model = "within")
+# Running a panel data with random effects
+random <- plm(unemployment ~ primEduc + lowSecEduc + upSecEduc + longCycleTerEduc,
+              data = mydata, index = c("country", "year"), model = "random")
+# Running the Hausman test
+phtest(fixed, random)
+```
+
+Considering the results of the Hausman test that show a p-value of 0.03958, which is below 0.05, we need a fixed-effects model.
+
+```{r}
+plot(unemployment ~ primEduc + lowSecEduc + upSecEduc + longCycleTerEduc,
+              data = mydata)
+#this gives 4 basic plots of each of the independent variables against the dependent variable
+```
+
+Model with all the independent variables, no controls
+
+```{r}
+model1 <- plm(unemployment ~ primEduc + lowSecEduc + upSecEduc + longCycleTerEduc,
+             data = mydata, index = c("country", "year"), model = "within")
+summary(model1)
+```
+
+Model with control variables only
+
+```{r}
+modelControl <- plm(unemployment ~ gdp + avRatio + adultEducTer,
+             data = mydata, index = c("country", "year"), model = "within")
+summary(modelControl)
+```
+
+Model with primary education expenditure
+
+```{r}
+modelPrimEduc <- plm(unemployment ~ gdp + avRatio + adultEducTer + primEduc,
+             data = mydata, index = c("country", "year"), model = "within")
+summary(modelPrimEduc)
+```
+
+Model with lower secondary education expenditure
+
+```{r}
+modelLowSecEduc <- plm(unemployment ~ gdp + avRatio + adultEducTer + lowSecEduc,
+             data = mydata, index = c("country", "year"), model = "within")
+summary(modelLowSecEduc)
+```
+
+Model with upper secondary education expenditure
+
+```{r}
+modelUpSecEduc <- plm(unemployment ~ gdp + avRatio + adultEducTer + upSecEduc,
+             data = mydata, index = c("country", "year"), model = "within")
+summary(modelUpSecEduc)
+```
+
+Model with long cycle tertiary education expenditure
+
+```{r}
+modelLongCycleTerEduc <- plm(unemployment ~ gdp + avRatio + adultEducTer + longCycleTerEduc,
+             data = mydata, index = c("country", "year"), model = "within")
+summary(modelLongCycleTerEduc)
+```
+
+Model with all independent and control varaiables
+
+```{r}
+modelFull <- plm(unemployment ~ gdp + avRatio + adultEducTer + primEduc + lowSecEduc + upSecEduc + longCycleTerEduc,
+             data = mydata, index = c("country", "year"), model = "within")
+summary(modelFull)
+```
+
+Model with interaction terms?
+
+Model with 
