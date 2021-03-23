@@ -1,5 +1,5 @@
 ---
-title: "Group Project Team 4"
+title: "Group Project Draft"
 author: "Catherine Vanaise"
 date: "22/03/2021"
 output: html_document
@@ -121,6 +121,9 @@ Model with primary education expenditure in North America
 ```{r}
 modelPrimEducIntNAF <- plm(unemployment ~  avRatio + adultEducTer + primEducGdp*northAmerica,
              data = mydata, index = c("country", "year"), model = "within")
+modelPrimEducIntNAR <- plm(unemployment ~  avRatio + adultEducTer + primEducGdp*northAmerica,
+             data = mydata, index = c("country", "year"), model = "random")
+phtest(modelPrimEducIntNAF, modelPrimEducIntNAR)
 
 #need fixed
 summary(modelPrimEducIntNAF)
@@ -131,6 +134,9 @@ Model with primary education expenditure in South America
 ```{r}
 modelPrimEducIntSAF <- plm(unemployment ~  avRatio + adultEducTer + primEducGdp*southAmerica,
              data = mydata, index = c("country", "year"), model = "within")
+modelPrimEducIntSAR <- plm(unemployment ~  avRatio + adultEducTer + primEducGdp*southAmerica,
+             data = mydata, index = c("country", "year"), model = "random")
+phtest(modelPrimEducIntSAF, modelPrimEducIntSAR)
 
 #need fixed
 summary(modelPrimEducIntSAF)
@@ -195,6 +201,9 @@ Model with lower secondary education expenditure in North America
 ```{r}
 modelLowSecEducIntNAF <- plm(unemployment ~  avRatio + adultEducTer + lowSecEducGdp*northAmerica,
              data = mydata, index = c("country", "year"), model = "within")
+modelLowSecEducIntNAR <- plm(unemployment ~  avRatio + adultEducTer + lowSecEducGdp*northAmerica,
+             data = mydata, index = c("country", "year"), model = "random")
+phtest(modelLowSecEducIntNAF, modelLowSecEducIntNAR)
 
 #need fixed
 summary(modelLowSecEducIntNAF)
@@ -205,6 +214,9 @@ Model with lower secondary education expenditure in South America
 ```{r}
 modelLowSecEducIntSAF <- plm(unemployment ~  avRatio + adultEducTer + lowSecEducGdp*southAmerica,
              data = mydata, index = c("country", "year"), model = "within")
+modelLowSecEducIntSAR <- plm(unemployment ~  avRatio + adultEducTer + lowSecEducGdp*southAmerica,
+             data = mydata, index = c("country", "year"), model = "random")
+phtest(modelLowSecEducIntSAF, modelLowSecEducIntSAR)
 
 #need fixed
 summary(modelPrimEducIntSAF)
@@ -270,6 +282,9 @@ Model with upper secondary education expenditure in North America
 ```{r}
 modelUpSecEducIntNAF <- plm(unemployment ~  avRatio + adultEducTer + upSecEducGdp*northAmerica,
              data = mydata, index = c("country", "year"), model = "within")
+modelUpSecEducIntNAR <- plm(unemployment ~  avRatio + adultEducTer + upSecEducGdp*northAmerica,
+             data = mydata, index = c("country", "year"), model = "random")
+phtest(modelUpSecEducIntNAF, modelUpSecEducIntNAR)
 
 #need fixed
 summary(modelUpSecEducIntNAF)
@@ -280,6 +295,9 @@ Model with upper secondary education expenditure in South America
 ```{r}
 modelUpSecEducIntSAF <- plm(unemployment ~  avRatio + adultEducTer + upSecEducGdp*southAmerica,
              data = mydata, index = c("country", "year"), model = "within")
+modelUpSecEducIntSAR <- plm(unemployment ~  avRatio + adultEducTer + upSecEducGdp*southAmerica,
+             data = mydata, index = c("country", "year"), model = "random")
+phtest(modelUpSecEducIntNAF, modelUpSecEducIntNAR)
 
 #need fixed
 summary(modelUpSecEducIntSAF)
@@ -345,6 +363,9 @@ Model with long cycle tertiary education expenditure in North America
 ```{r}
 modelLongCycleTerEducIntNAF <- plm(unemployment ~  avRatio + adultEducTer + longCycleTerEducGdp*northAmerica,
              data = mydata, index = c("country", "year"), model = "within")
+modelLongCycleTerEducIntNAR <- plm(unemployment ~  avRatio + adultEducTer + longCycleTerEducGdp*northAmerica,
+             data = mydata, index = c("country", "year"), model = "random")
+phtest(modelLongCycleTerEducIntNAF, modelLongCycleTerEducIntNAR)
 
 #need fixed
 summary(modelLongCycleTerEducIntNAF)
@@ -355,6 +376,9 @@ Model with long cycle tertiary education expenditure in South America
 ```{r}
 modelLongCycleTerEducIntSAF <- plm(unemployment ~  avRatio + adultEducTer + longCycleTerEducGdp*southAmerica,
              data = mydata, index = c("country", "year"), model = "within")
+modelLongCycleTerEducIntSAR <- plm(unemployment ~  avRatio + adultEducTer + longCycleTerEducGdp*southAmerica,
+             data = mydata, index = c("country", "year"), model = "random")
+phtest(modelLongCycleTerEducIntNAF, modelLongCycleTerEducIntNAR)
 
 #need fixed
 summary(modelLongCycleTerEducIntSAF)
@@ -413,12 +437,27 @@ summary(modelLongCycleTerEducIntOF)
 ```
 
 
+
 Income
 
 ```{r}
 quantile(mydata$gdpph, probs = c(0, 0.25, 0.5, 0.75, 1))
 ```
 
+
+```{r}
+library(tidyverse)
+quantile(mydata$gdpph, probs = c(0, 0.25, 0.5, 0.75, 1))
+
+mydata <- mydata %>% mutate(lowerMiddle = case_when(26725.26 < gdpph < 33643.00 ~ 1
+                                                      , TRUE ~ 0))
+mydata <- mydata %>% mutate(upperMiddle = case_when(33643.01 < gdpph <  43618.75~ 1
+                                                      , TRUE ~ 0))
+mydata <- mydata %>% mutate(upper = case_when(43618.75 < gdpph < 87496 ~ 1
+                                                      , TRUE ~ 0))
+
+#lower is with none of these (0 for all)
+```
 
 ```{r}
 mydata$lowerMiddle<-0
@@ -514,7 +553,7 @@ modelLowSecEducIntUF <- plm(unemployment ~  avRatio + adultEducTer + lowSecEducG
              data = mydata, index = c("country", "year"), model = "within")
 modelLowSecEducIntUR <- plm(unemployment ~  avRatio + adultEducTer + lowSecEducGdp*upper,
              data = mydata, index = c("country", "year"), model = "random")
-phtest(modelLowSecEducIntUF, modelLowSecEducIntUR)
+phtest(modelLowSecEducIntUF, modelUpSecEducIntUR)
 
 #need fixed
 summary(modelLowSecEducIntUF)
