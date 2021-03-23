@@ -15,6 +15,14 @@ library(gsheet)
 mydata <- gsheet2tbl("https://docs.google.com/spreadsheets/d/1zcYomqhibeLyxaeTyJz8etOqUWqDLH_4/edit#gid=550557869")
 ```
 
+```{r}
+mydata$primEducGdp <- mydata$primEduc/mydata$gdp
+mydata$lowSecEducGdp <- mydata$lowSecEduc/mydata$gdp
+mydata$upSecEducGdp <- mydata$upSecEduc/mydata$gdp
+mydata$longCycleTerEducGdp <- mydata$longCycleTerEduc/mydata$gdp
+```
+
+
 We must first determine if we need a fixed-effects model to help remove the effects of time-invariant characteristics (such as the countries and years). If fixed-effects do affect the model, it is important to control for them to ensure that the model will then be truly measuring the impact of the independent variables on the dependent variable. 
 
 Below are the results of the Hausman Test performed on the data, determining whether the model should be fixed or random.
@@ -51,7 +59,7 @@ summary(model1)
 Model with control variables only
 
 ```{r}
-modelControl <- plm(unemployment ~ gdp + avRatio + adultEducTer,
+modelControl <- plm(unemployment ~ gdpph + avRatio + adultEducTer,
              data = mydata, index = c("country", "year"), model = "within")
 summary(modelControl)
 ```
@@ -59,7 +67,7 @@ summary(modelControl)
 Model with primary education expenditure
 
 ```{r}
-modelPrimEduc <- plm(unemployment ~ gdp + avRatio + adultEducTer + primEduc,
+modelPrimEduc <- plm(unemployment ~ gdpph + avRatio + adultEducTer + primEduc,
              data = mydata, index = c("country", "year"), model = "within")
 summary(modelPrimEduc)
 ```
@@ -67,7 +75,7 @@ summary(modelPrimEduc)
 Model with lower secondary education expenditure
 
 ```{r}
-modelLowSecEduc <- plm(unemployment ~ gdp + avRatio + adultEducTer + lowSecEduc,
+modelLowSecEduc <- plm(unemployment ~ gdpph + avRatio + adultEducTer + lowSecEduc,
              data = mydata, index = c("country", "year"), model = "within")
 summary(modelLowSecEduc)
 ```
@@ -75,7 +83,7 @@ summary(modelLowSecEduc)
 Model with upper secondary education expenditure
 
 ```{r}
-modelUpSecEduc <- plm(unemployment ~ gdp + avRatio + adultEducTer + upSecEduc,
+modelUpSecEduc <- plm(unemployment ~ gdpph + avRatio + adultEducTer + upSecEduc,
              data = mydata, index = c("country", "year"), model = "within")
 summary(modelUpSecEduc)
 ```
@@ -83,7 +91,7 @@ summary(modelUpSecEduc)
 Model with long cycle tertiary education expenditure
 
 ```{r}
-modelLongCycleTerEduc <- plm(unemployment ~ gdp + avRatio + adultEducTer + longCycleTerEduc,
+modelLongCycleTerEduc <- plm(unemployment ~ gdpph + avRatio + adultEducTer + longCycleTerEduc,
              data = mydata, index = c("country", "year"), model = "within")
 summary(modelLongCycleTerEduc)
 ```
@@ -91,7 +99,7 @@ summary(modelLongCycleTerEduc)
 Model with all independent and control varaiables
 
 ```{r}
-modelFull <- plm(unemployment ~ gdp + avRatio + adultEducTer + primEduc + lowSecEduc + upSecEduc + longCycleTerEduc,
+modelFull <- plm(unemployment ~ gdpph + avRatio + adultEducTer + primEduc* + lowSecEduc + upSecEduc + longCycleTerEduc,
              data = mydata, index = c("country", "year"), model = "within")
 summary(modelFull)
 ```
