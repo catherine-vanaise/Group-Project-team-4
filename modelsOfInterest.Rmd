@@ -214,7 +214,7 @@ abline(modelLongCycleEducF)
 ```
 
 ```{r}
-plot(y=modelLongCycleEducF$residuals, x=mydata$longCycleTerEducGdp)
+#plot(y=modelLongCycleEducF$residuals, x=mydata$longCycleTerEducGdp)
 
 #I cannot plot the residuals either because their are too many dimensions
 ```

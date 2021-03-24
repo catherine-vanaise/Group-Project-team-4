@@ -1,0 +1,988 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{lmodern}
+\usepackage{amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+  \usepackage{amssymb}
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Models of Interest},
+  pdfauthor={Catherine Vanaise},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifluatex
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\title{Models of Interest}
+\author{Catherine Vanaise}
+\date{23/03/2021}
+
+\begin{document}
+\maketitle
+
+\hypertarget{preliminary-models-testing-the-hypotheses}{%
+\section{Preliminary models testing the
+hypotheses}\label{preliminary-models-testing-the-hypotheses}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Loading the data}
+\FunctionTok{library}\NormalTok{(gsheet)}
+\NormalTok{mydata }\OtherTok{\textless{}{-}} \FunctionTok{gsheet2tbl}\NormalTok{(}\StringTok{"https://docs.google.com/spreadsheets/d/1zcYomqhibeLyxaeTyJz8etOqUWqDLH\_4/edit\#gid=550557869"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mydata}\SpecialCharTok{$}\NormalTok{primEducGdp }\OtherTok{\textless{}{-}}\NormalTok{ mydata}\SpecialCharTok{$}\NormalTok{primEduc}\SpecialCharTok{/}\NormalTok{mydata}\SpecialCharTok{$}\NormalTok{gdp}\SpecialCharTok{*}\DecValTok{100}
+\NormalTok{mydata}\SpecialCharTok{$}\NormalTok{lowSecEducGdp }\OtherTok{\textless{}{-}}\NormalTok{ mydata}\SpecialCharTok{$}\NormalTok{lowSecEduc}\SpecialCharTok{/}\NormalTok{mydata}\SpecialCharTok{$}\NormalTok{gdp}\SpecialCharTok{*}\DecValTok{100}
+\NormalTok{mydata}\SpecialCharTok{$}\NormalTok{upSecEducGdp }\OtherTok{\textless{}{-}}\NormalTok{ mydata}\SpecialCharTok{$}\NormalTok{upSecEduc}\SpecialCharTok{/}\NormalTok{mydata}\SpecialCharTok{$}\NormalTok{gdp}\SpecialCharTok{*}\DecValTok{100}
+\NormalTok{mydata}\SpecialCharTok{$}\NormalTok{longCycleTerEducGdp }\OtherTok{\textless{}{-}}\NormalTok{ mydata}\SpecialCharTok{$}\NormalTok{longCycleTerEduc}\SpecialCharTok{/}\NormalTok{mydata}\SpecialCharTok{$}\NormalTok{gdp}\SpecialCharTok{*}\DecValTok{100}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(}\StringTok{"plm"}\NormalTok{)) }\FunctionTok{install.packages}\NormalTok{(}\StringTok{"plm"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: plm
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(plm)}
+\end{Highlighting}
+\end{Shaded}
+
+We must first determine if we need a fixed-effects model to help remove
+the effects of time-invariant characteristics (such as the countries and
+years). If fixed-effects do affect the model, it is important to control
+for them to ensure that the model will then be truly measuring the
+impact of the independent variables on the dependent variable.
+
+Considering the results of the Hausman test for all models that show a
+p-value lower than 0.05, we need a fixed-effects model. EXCEPT: Model
+with long cycle tertiary education with income dummy (should use random)
+(other models with income suggest using random, but we do not study them
+here)
+
+\hypertarget{model-with-control-variables-only}{%
+\subsection{Model with control variables
+only}\label{model-with-control-variables-only}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{modelControlF }\OtherTok{\textless{}{-}} \FunctionTok{plm}\NormalTok{(unemployment }\SpecialCharTok{\textasciitilde{}}\NormalTok{  avRatio }\SpecialCharTok{+}\NormalTok{ adultEducTer,}
+             \AttributeTok{data =}\NormalTok{ mydata, }\AttributeTok{index =} \FunctionTok{c}\NormalTok{(}\StringTok{"country"}\NormalTok{, }\StringTok{"year"}\NormalTok{), }\AttributeTok{model =} \StringTok{"within"}\NormalTok{)}
+\NormalTok{modelControlR }\OtherTok{\textless{}{-}} \FunctionTok{plm}\NormalTok{(unemployment }\SpecialCharTok{\textasciitilde{}}\NormalTok{ avRatio }\SpecialCharTok{+}\NormalTok{ adultEducTer,}
+             \AttributeTok{data =}\NormalTok{ mydata, }\AttributeTok{index =} \FunctionTok{c}\NormalTok{(}\StringTok{"country"}\NormalTok{, }\StringTok{"year"}\NormalTok{), }\AttributeTok{model =} \StringTok{"random"}\NormalTok{)}
+\FunctionTok{phtest}\NormalTok{(modelControlF, modelControlR)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Hausman Test
+## 
+## data:  unemployment ~ avRatio + adultEducTer
+## chisq = 11.527, df = 2, p-value = 0.003141
+## alternative hypothesis: one model is inconsistent
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#need fixed}
+\FunctionTok{summary}\NormalTok{(modelControlF)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Oneway (individual) effect Within Model
+## 
+## Call:
+## plm(formula = unemployment ~ avRatio + adultEducTer, data = mydata, 
+##     model = "within", index = c("country", "year"))
+## 
+## Unbalanced Panel: n = 26, T = 1-5, N = 119
+## 
+## Residuals:
+##      Min.   1st Qu.    Median   3rd Qu.      Max. 
+## -3.969299 -0.453982 -0.015381  0.399908  3.435571 
+## 
+## Coefficients:
+##               Estimate Std. Error t-value Pr(>|t|)    
+## avRatio       0.002380   0.113432  0.0210   0.9833    
+## adultEducTer -0.571410   0.072702 -7.8597 7.47e-12 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Total Sum of Squares:    193.9
+## Residual Sum of Squares: 114.09
+## R-Squared:      0.41164
+## Adj. R-Squared: 0.23707
+## F-statistic: 31.8339 on 2 and 91 DF, p-value: 3.3014e-11
+\end{verbatim}
+
+Talk about accuracy of controls
+
+\hypertarget{model-with-primary-education-expenditure}{%
+\subsection{Model with primary education
+expenditure}\label{model-with-primary-education-expenditure}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{modelPrimEducF }\OtherTok{\textless{}{-}} \FunctionTok{plm}\NormalTok{(unemployment }\SpecialCharTok{\textasciitilde{}}\NormalTok{  avRatio }\SpecialCharTok{+}\NormalTok{ adultEducTer }\SpecialCharTok{+}\NormalTok{ primEducGdp,}
+             \AttributeTok{data =}\NormalTok{ mydata, }\AttributeTok{index =} \FunctionTok{c}\NormalTok{(}\StringTok{"country"}\NormalTok{, }\StringTok{"year"}\NormalTok{), }\AttributeTok{model =} \StringTok{"within"}\NormalTok{)}
+\NormalTok{modelPrimEducR }\OtherTok{\textless{}{-}} \FunctionTok{plm}\NormalTok{(unemployment }\SpecialCharTok{\textasciitilde{}}\NormalTok{  avRatio }\SpecialCharTok{+}\NormalTok{ adultEducTer }\SpecialCharTok{+}\NormalTok{ primEducGdp,}
+             \AttributeTok{data =}\NormalTok{ mydata, }\AttributeTok{index =} \FunctionTok{c}\NormalTok{(}\StringTok{"country"}\NormalTok{, }\StringTok{"year"}\NormalTok{), }\AttributeTok{model =} \StringTok{"random"}\NormalTok{)}
+\FunctionTok{phtest}\NormalTok{(modelPrimEducF, modelPrimEducR)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Hausman Test
+## 
+## data:  unemployment ~ avRatio + adultEducTer + primEducGdp
+## chisq = 16.56, df = 3, p-value = 0.0008704
+## alternative hypothesis: one model is inconsistent
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#need fixed}
+\FunctionTok{summary}\NormalTok{(modelPrimEducF)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Oneway (individual) effect Within Model
+## 
+## Call:
+## plm(formula = unemployment ~ avRatio + adultEducTer + primEducGdp, 
+##     data = mydata, model = "within", index = c("country", "year"))
+## 
+## Unbalanced Panel: n = 26, T = 1-5, N = 118
+## 
+## Residuals:
+##      Min.   1st Qu.    Median   3rd Qu.      Max. 
+## -3.939261 -0.471176 -0.029981  0.451389  3.409227 
+## 
+## Coefficients:
+##               Estimate Std. Error t-value  Pr(>|t|)    
+## avRatio       0.042621   0.114408  0.3725    0.7104    
+## adultEducTer -0.592579   0.072769 -8.1433 2.206e-12 ***
+## primEducGdp  -0.018365   1.750716 -0.0105    0.9917    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Total Sum of Squares:    193.62
+## Residual Sum of Squares: 109.31
+## R-Squared:      0.43543
+## Adj. R-Squared: 0.25781
+## F-statistic: 22.8802 on 3 and 89 DF, p-value: 4.5436e-11
+\end{verbatim}
+
+Talk about accuracy (cannot reject null)
+
+\hypertarget{model-with-lower-secondary-education-expenditure}{%
+\subsection{Model with lower secondary education
+expenditure}\label{model-with-lower-secondary-education-expenditure}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{modelLowSecEducF }\OtherTok{\textless{}{-}} \FunctionTok{plm}\NormalTok{(unemployment }\SpecialCharTok{\textasciitilde{}}\NormalTok{  avRatio }\SpecialCharTok{+}\NormalTok{ adultEducTer }\SpecialCharTok{+}\NormalTok{ lowSecEducGdp,}
+             \AttributeTok{data =}\NormalTok{ mydata, }\AttributeTok{index =} \FunctionTok{c}\NormalTok{(}\StringTok{"country"}\NormalTok{, }\StringTok{"year"}\NormalTok{), }\AttributeTok{model =} \StringTok{"within"}\NormalTok{)}
+\NormalTok{modelLowSecEducR }\OtherTok{\textless{}{-}} \FunctionTok{plm}\NormalTok{(unemployment }\SpecialCharTok{\textasciitilde{}}\NormalTok{  avRatio }\SpecialCharTok{+}\NormalTok{ adultEducTer }\SpecialCharTok{+}\NormalTok{ lowSecEducGdp,}
+             \AttributeTok{data =}\NormalTok{ mydata, }\AttributeTok{index =} \FunctionTok{c}\NormalTok{(}\StringTok{"country"}\NormalTok{, }\StringTok{"year"}\NormalTok{), }\AttributeTok{model =} \StringTok{"random"}\NormalTok{)}
+\FunctionTok{phtest}\NormalTok{(modelLowSecEducF, modelLowSecEducR)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Hausman Test
+## 
+## data:  unemployment ~ avRatio + adultEducTer + lowSecEducGdp
+## chisq = 17.315, df = 3, p-value = 0.0006087
+## alternative hypothesis: one model is inconsistent
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#need fixed}
+\FunctionTok{summary}\NormalTok{(modelLowSecEducF)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Oneway (individual) effect Within Model
+## 
+## Call:
+## plm(formula = unemployment ~ avRatio + adultEducTer + lowSecEducGdp, 
+##     data = mydata, model = "within", index = c("country", "year"))
+## 
+## Unbalanced Panel: n = 25, T = 1-5, N = 113
+## 
+## Residuals:
+##      Min.   1st Qu.    Median   3rd Qu.      Max. 
+## -3.939769 -0.487940 -0.022036  0.476306  3.420066 
+## 
+## Coefficients:
+##                Estimate Std. Error t-value  Pr(>|t|)    
+## avRatio        0.046991   0.118141  0.3978    0.6918    
+## adultEducTer  -0.574940   0.080166 -7.1719 2.545e-10 ***
+## lowSecEducGdp  1.802534   2.804250  0.6428    0.5221    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Total Sum of Squares:    190.99
+## Residual Sum of Squares: 108.65
+## R-Squared:      0.43115
+## Adj. R-Squared: 0.25045
+## F-statistic: 21.4745 on 3 and 85 DF, p-value: 1.9129e-10
+\end{verbatim}
+
+Talk about accuracy (cannot reject null)
+
+\hypertarget{model-with-upper-secondary-education-expenditure}{%
+\subsection{Model with upper secondary education
+expenditure}\label{model-with-upper-secondary-education-expenditure}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{modelUpSecEducF }\OtherTok{\textless{}{-}} \FunctionTok{plm}\NormalTok{(unemployment }\SpecialCharTok{\textasciitilde{}}\NormalTok{  avRatio }\SpecialCharTok{+}\NormalTok{ adultEducTer }\SpecialCharTok{+}\NormalTok{ upSecEducGdp,}
+             \AttributeTok{data =}\NormalTok{ mydata, }\AttributeTok{index =} \FunctionTok{c}\NormalTok{(}\StringTok{"country"}\NormalTok{, }\StringTok{"year"}\NormalTok{), }\AttributeTok{model =} \StringTok{"within"}\NormalTok{)}
+\NormalTok{modelUpSecEducR }\OtherTok{\textless{}{-}} \FunctionTok{plm}\NormalTok{(unemployment }\SpecialCharTok{\textasciitilde{}}\NormalTok{  avRatio }\SpecialCharTok{+}\NormalTok{ adultEducTer }\SpecialCharTok{+}\NormalTok{ upSecEducGdp,}
+             \AttributeTok{data =}\NormalTok{ mydata, }\AttributeTok{index =} \FunctionTok{c}\NormalTok{(}\StringTok{"country"}\NormalTok{, }\StringTok{"year"}\NormalTok{), }\AttributeTok{model =} \StringTok{"random"}\NormalTok{)}
+\FunctionTok{phtest}\NormalTok{(modelUpSecEducF, modelUpSecEducR)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Hausman Test
+## 
+## data:  unemployment ~ avRatio + adultEducTer + upSecEducGdp
+## chisq = 39.811, df = 3, p-value = 1.169e-08
+## alternative hypothesis: one model is inconsistent
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#need fixed}
+\FunctionTok{summary}\NormalTok{(modelUpSecEducF)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Oneway (individual) effect Within Model
+## 
+## Call:
+## plm(formula = unemployment ~ avRatio + adultEducTer + upSecEducGdp, 
+##     data = mydata, model = "within", index = c("country", "year"))
+## 
+## Unbalanced Panel: n = 23, T = 1-5, N = 99
+## 
+## Residuals:
+##      Min.   1st Qu.    Median   3rd Qu.      Max. 
+## -2.314498 -0.498105 -0.015673  0.416848  2.438814 
+## 
+## Coefficients:
+##               Estimate Std. Error t-value  Pr(>|t|)    
+## avRatio       0.037748   0.099487  0.3794    0.7055    
+## adultEducTer -0.542911   0.072156 -7.5241 1.099e-10 ***
+## upSecEducGdp -1.317986   1.778739 -0.7410    0.4611    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Total Sum of Squares:    122.21
+## Residual Sum of Squares: 65.552
+## R-Squared:      0.46359
+## Adj. R-Squared: 0.27989
+## F-statistic: 21.0299 on 3 and 73 DF, p-value: 6.3726e-10
+\end{verbatim}
+
+Talk about accuracy (cannot reject null)
+
+\hypertarget{model-with-long-cycle-tertiary-education-expenditure}{%
+\subsection{Model with long cycle tertiary education
+expenditure}\label{model-with-long-cycle-tertiary-education-expenditure}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{modelLongCycleEducF }\OtherTok{\textless{}{-}} \FunctionTok{plm}\NormalTok{(unemployment }\SpecialCharTok{\textasciitilde{}}\NormalTok{  avRatio }\SpecialCharTok{+}\NormalTok{ adultEducTer }\SpecialCharTok{+}\NormalTok{ longCycleTerEducGdp,}
+             \AttributeTok{data =}\NormalTok{ mydata, }\AttributeTok{index =} \FunctionTok{c}\NormalTok{(}\StringTok{"country"}\NormalTok{, }\StringTok{"year"}\NormalTok{), }\AttributeTok{model =} \StringTok{"within"}\NormalTok{)}
+\NormalTok{modelLongCycleEducR }\OtherTok{\textless{}{-}} \FunctionTok{plm}\NormalTok{(unemployment }\SpecialCharTok{\textasciitilde{}}\NormalTok{  avRatio }\SpecialCharTok{+}\NormalTok{ adultEducTer }\SpecialCharTok{+}\NormalTok{ longCycleTerEducGdp,}
+             \AttributeTok{data =}\NormalTok{ mydata, }\AttributeTok{index =} \FunctionTok{c}\NormalTok{(}\StringTok{"country"}\NormalTok{, }\StringTok{"year"}\NormalTok{), }\AttributeTok{model =} \StringTok{"random"}\NormalTok{)}
+\FunctionTok{phtest}\NormalTok{(modelLongCycleEducF, modelLongCycleEducR)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Hausman Test
+## 
+## data:  unemployment ~ avRatio + adultEducTer + longCycleTerEducGdp
+## chisq = 81.979, df = 3, p-value < 2.2e-16
+## alternative hypothesis: one model is inconsistent
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#need fixed}
+\FunctionTok{summary}\NormalTok{(modelLongCycleEducF)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Oneway (individual) effect Within Model
+## 
+## Call:
+## plm(formula = unemployment ~ avRatio + adultEducTer + longCycleTerEducGdp, 
+##     data = mydata, model = "within", index = c("country", "year"))
+## 
+## Unbalanced Panel: n = 24, T = 2-5, N = 112
+## 
+## Residuals:
+##        Min.     1st Qu.      Median     3rd Qu.        Max. 
+## -3.9970e+00 -4.3449e-01  8.4259e-05  4.4955e-01  3.4684e+00 
+## 
+## Coefficients:
+##                      Estimate Std. Error t-value Pr(>|t|)    
+## avRatio              0.039983   0.112240  0.3562  0.72255    
+## adultEducTer        -0.510615   0.078836 -6.4769 5.79e-09 ***
+## longCycleTerEducGdp  2.410667   1.033597  2.3323  0.02205 *  
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Total Sum of Squares:    188.01
+## Residual Sum of Squares: 100.99
+## R-Squared:      0.46284
+## Adj. R-Squared: 0.29853
+## F-statistic: 24.4132 on 3 and 85 DF, p-value: 1.7308e-11
+\end{verbatim}
+
+Talk about accuracy (reject null)
+
+\hypertarget{region-dummy}{%
+\section{Region Dummy}\label{region-dummy}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## -- Attaching packages --------------------------------------- tidyverse 1.3.0 --
+\end{verbatim}
+
+\begin{verbatim}
+## v ggplot2 3.3.3     v purrr   0.3.4
+## v tibble  3.0.6     v dplyr   1.0.4
+## v tidyr   1.1.2     v stringr 1.4.0
+## v readr   1.4.0     v forcats 0.5.1
+\end{verbatim}
+
+\begin{verbatim}
+## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
+## x dplyr::between() masks plm::between()
+## x dplyr::filter()  masks stats::filter()
+## x dplyr::lag()     masks stats::lag()
+## x dplyr::lead()    masks plm::lead()
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mydata }\OtherTok{\textless{}{-}}\NormalTok{ mydata }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mutate}\NormalTok{(}\AttributeTok{northAmerica =} \FunctionTok{case\_when}\NormalTok{(region }\SpecialCharTok{==} \StringTok{"North America"} \SpecialCharTok{\textasciitilde{}} \DecValTok{1}
+\NormalTok{                                                      , }\ConstantTok{TRUE} \SpecialCharTok{\textasciitilde{}} \DecValTok{0}\NormalTok{))}
+\NormalTok{mydata }\OtherTok{\textless{}{-}}\NormalTok{ mydata }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mutate}\NormalTok{(}\AttributeTok{southAmerica =} \FunctionTok{case\_when}\NormalTok{(region }\SpecialCharTok{==} \StringTok{"South America"} \SpecialCharTok{\textasciitilde{}} \DecValTok{1}
+\NormalTok{                                                      , }\ConstantTok{TRUE} \SpecialCharTok{\textasciitilde{}} \DecValTok{0}\NormalTok{))}
+\NormalTok{mydata }\OtherTok{\textless{}{-}}\NormalTok{ mydata }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mutate}\NormalTok{(}\AttributeTok{westernEurope =} \FunctionTok{case\_when}\NormalTok{(region }\SpecialCharTok{==} \StringTok{"Western"} \SpecialCharTok{\textasciitilde{}} \DecValTok{1}
+\NormalTok{                                                      , }\ConstantTok{TRUE} \SpecialCharTok{\textasciitilde{}} \DecValTok{0}\NormalTok{))}
+\NormalTok{mydata }\OtherTok{\textless{}{-}}\NormalTok{ mydata }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mutate}\NormalTok{(}\AttributeTok{easternEurope =} \FunctionTok{case\_when}\NormalTok{(region }\SpecialCharTok{==} \StringTok{"Eastern"} \SpecialCharTok{\textasciitilde{}} \DecValTok{1}
+\NormalTok{                                                      , }\ConstantTok{TRUE} \SpecialCharTok{\textasciitilde{}} \DecValTok{0}\NormalTok{))}
+\NormalTok{mydata }\OtherTok{\textless{}{-}}\NormalTok{ mydata }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mutate}\NormalTok{(}\AttributeTok{northernEurope =} \FunctionTok{case\_when}\NormalTok{(region }\SpecialCharTok{==} \StringTok{"Northern"} \SpecialCharTok{\textasciitilde{}} \DecValTok{1}
+\NormalTok{                                                      , }\ConstantTok{TRUE} \SpecialCharTok{\textasciitilde{}} \DecValTok{0}\NormalTok{))}
+\NormalTok{mydata }\OtherTok{\textless{}{-}}\NormalTok{ mydata }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mutate}\NormalTok{(}\AttributeTok{oceania =} \FunctionTok{case\_when}\NormalTok{(region }\SpecialCharTok{==} \StringTok{"Oceania"} \SpecialCharTok{\textasciitilde{}} \DecValTok{1}
+\NormalTok{                                                      , }\ConstantTok{TRUE} \SpecialCharTok{\textasciitilde{}} \DecValTok{0}\NormalTok{))}
+\CommentTok{\#middle east is with none of these (0 for all)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{model-with-long-cycle-tertiary-education-with-region-dummy-to-compare-with-the-significant-model}{%
+\subsection{Model with long cycle tertiary education with region dummy
+(to compare with the significant
+model)}\label{model-with-long-cycle-tertiary-education-with-region-dummy-to-compare-with-the-significant-model}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{modelLongCycleTerEducIntALLF }\OtherTok{\textless{}{-}} \FunctionTok{plm}\NormalTok{(unemployment }\SpecialCharTok{\textasciitilde{}}\NormalTok{  avRatio }\SpecialCharTok{+}\NormalTok{ adultEducTer }\SpecialCharTok{+}\NormalTok{ longCycleTerEducGdp}\SpecialCharTok{*}\NormalTok{northAmerica }\SpecialCharTok{+}\NormalTok{ longCycleTerEducGdp}\SpecialCharTok{*}\NormalTok{southAmerica }\SpecialCharTok{+}\NormalTok{ longCycleTerEducGdp}\SpecialCharTok{*}\NormalTok{westernEurope }\SpecialCharTok{+}\NormalTok{ longCycleTerEducGdp}\SpecialCharTok{*}\NormalTok{easternEurope }\SpecialCharTok{+}\NormalTok{ longCycleTerEducGdp}\SpecialCharTok{*}\NormalTok{northernEurope }\SpecialCharTok{+}\NormalTok{ longCycleTerEducGdp}\SpecialCharTok{*}\NormalTok{oceania,}
+             \AttributeTok{data =}\NormalTok{ mydata, }\AttributeTok{index =} \FunctionTok{c}\NormalTok{(}\StringTok{"country"}\NormalTok{, }\StringTok{"year"}\NormalTok{), }\AttributeTok{model =} \StringTok{"within"}\NormalTok{)}
+
+\FunctionTok{summary}\NormalTok{(modelLongCycleTerEducIntALLF)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Oneway (individual) effect Within Model
+## 
+## Call:
+## plm(formula = unemployment ~ avRatio + adultEducTer + longCycleTerEducGdp * 
+##     northAmerica + longCycleTerEducGdp * southAmerica + longCycleTerEducGdp * 
+##     westernEurope + longCycleTerEducGdp * easternEurope + longCycleTerEducGdp * 
+##     northernEurope + longCycleTerEducGdp * oceania, data = mydata, 
+##     model = "within", index = c("country", "year"))
+## 
+## Unbalanced Panel: n = 24, T = 2-5, N = 112
+## 
+## Residuals:
+##      Min.   1st Qu.    Median   3rd Qu.      Max. 
+## -3.969922 -0.411148 -0.019394  0.392883  3.441998 
+## 
+## Coefficients:
+##                                     Estimate Std. Error t-value  Pr(>|t|)    
+## avRatio                             0.070285   0.115064  0.6108    0.5430    
+## adultEducTer                       -0.515984   0.083414 -6.1858 2.472e-08 ***
+## longCycleTerEducGdp                 1.294868   7.295130  0.1775    0.8596    
+## longCycleTerEducGdp:southAmerica   -4.582233   8.492115 -0.5396    0.5910    
+## longCycleTerEducGdp:westernEurope   2.071288   9.524967  0.2175    0.8284    
+## longCycleTerEducGdp:easternEurope   1.371938   7.319462  0.1874    0.8518    
+## longCycleTerEducGdp:northernEurope -6.700424  10.599532 -0.6321    0.5291    
+## longCycleTerEducGdp:oceania         4.757652   9.178445  0.5184    0.6056    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Total Sum of Squares:    188.01
+## Residual Sum of Squares: 97.145
+## R-Squared:      0.4833
+## Adj. R-Squared: 0.28308
+## F-statistic: 9.3536 on 8 and 80 DF, p-value: 5.1037e-09
+\end{verbatim}
+
+Talk about accuracy (cannot reject null)
+
+\hypertarget{income}{%
+\section{Income}\label{income}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{quantile}\NormalTok{(mydata}\SpecialCharTok{$}\NormalTok{gdpph, }\AttributeTok{probs =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\FloatTok{0.25}\NormalTok{, }\FloatTok{0.5}\NormalTok{, }\FloatTok{0.75}\NormalTok{, }\DecValTok{1}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       0%      25%      50%      75%     100% 
+## 20427.00 26725.25 33643.00 43618.75 87496.00
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mydata}\SpecialCharTok{$}\NormalTok{lowerMiddle}\OtherTok{\textless{}{-}}\DecValTok{0}
+\NormalTok{mydata}\SpecialCharTok{$}\NormalTok{lowerMiddle[mydata}\SpecialCharTok{$}\NormalTok{gdpph}\SpecialCharTok{\textgreater{}=}\FloatTok{26725.25}\SpecialCharTok{\&}\NormalTok{mydata}\SpecialCharTok{$}\NormalTok{gdpph}\SpecialCharTok{\textless{}}\DecValTok{33643}\NormalTok{]}\OtherTok{\textless{}{-}}\DecValTok{1}
+
+\NormalTok{mydata}\SpecialCharTok{$}\NormalTok{upperMiddle}\OtherTok{\textless{}{-}}\DecValTok{0}
+\NormalTok{mydata}\SpecialCharTok{$}\NormalTok{upperMiddle[mydata}\SpecialCharTok{$}\NormalTok{gdpph}\SpecialCharTok{\textgreater{}=}\DecValTok{33643}\SpecialCharTok{\&}\NormalTok{mydata}\SpecialCharTok{$}\NormalTok{gdpph}\SpecialCharTok{\textless{}}\FloatTok{43618.75}\NormalTok{]}\OtherTok{\textless{}{-}}\DecValTok{1}
+
+\NormalTok{mydata}\SpecialCharTok{$}\NormalTok{upper}\OtherTok{\textless{}{-}}\DecValTok{0}
+\NormalTok{mydata}\SpecialCharTok{$}\NormalTok{upper[mydata}\SpecialCharTok{$}\NormalTok{gdpph}\SpecialCharTok{\textgreater{}=}\FloatTok{43618.75}\SpecialCharTok{\&}\NormalTok{mydata}\SpecialCharTok{$}\NormalTok{gdpph}\SpecialCharTok{\textless{}=}\DecValTok{87496}\NormalTok{]}\OtherTok{\textless{}{-}}\DecValTok{1}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{model-with-long-cycle-tertiary-education-with-income-dummy}{%
+\subsection{Model with long cycle tertiary education with income
+dummy}\label{model-with-long-cycle-tertiary-education-with-income-dummy}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{modelLongCycleTerEducIntIncomeALLF }\OtherTok{\textless{}{-}} \FunctionTok{plm}\NormalTok{(unemployment }\SpecialCharTok{\textasciitilde{}}\NormalTok{  avRatio }\SpecialCharTok{+}\NormalTok{ adultEducTer }\SpecialCharTok{+}\NormalTok{ longCycleTerEducGdp}\SpecialCharTok{*}\NormalTok{lowerMiddle }\SpecialCharTok{+}\NormalTok{ longCycleTerEducGdp}\SpecialCharTok{*}\NormalTok{upperMiddle }\SpecialCharTok{+}\NormalTok{ longCycleTerEducGdp}\SpecialCharTok{*}\NormalTok{upper,}
+             \AttributeTok{data =}\NormalTok{ mydata, }\AttributeTok{index =} \FunctionTok{c}\NormalTok{(}\StringTok{"country"}\NormalTok{, }\StringTok{"year"}\NormalTok{), }\AttributeTok{model =} \StringTok{"within"}\NormalTok{)}
+
+\NormalTok{modelLongCycleTerEducIntIncomeALLR }\OtherTok{\textless{}{-}} \FunctionTok{plm}\NormalTok{(unemployment }\SpecialCharTok{\textasciitilde{}}\NormalTok{  avRatio }\SpecialCharTok{+}\NormalTok{ adultEducTer }\SpecialCharTok{+}\NormalTok{ longCycleTerEducGdp}\SpecialCharTok{*}\NormalTok{lowerMiddle }\SpecialCharTok{+}\NormalTok{ longCycleTerEducGdp}\SpecialCharTok{*}\NormalTok{upperMiddle }\SpecialCharTok{+}\NormalTok{ longCycleTerEducGdp}\SpecialCharTok{*}\NormalTok{upper,}
+             \AttributeTok{data =}\NormalTok{ mydata, }\AttributeTok{index =} \FunctionTok{c}\NormalTok{(}\StringTok{"country"}\NormalTok{, }\StringTok{"year"}\NormalTok{), }\AttributeTok{model =} \StringTok{"random"}\NormalTok{)}
+
+\FunctionTok{phtest}\NormalTok{(modelLongCycleTerEducIntIncomeALLF, modelLongCycleTerEducIntIncomeALLR)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Hausman Test
+## 
+## data:  unemployment ~ avRatio + adultEducTer + longCycleTerEducGdp *  ...
+## chisq = 5.6858, df = 9, p-value = 0.7709
+## alternative hypothesis: one model is inconsistent
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(modelLongCycleTerEducIntIncomeALLR)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Oneway (individual) effect Random Effect Model 
+##    (Swamy-Arora's transformation)
+## 
+## Call:
+## plm(formula = unemployment ~ avRatio + adultEducTer + longCycleTerEducGdp * 
+##     lowerMiddle + longCycleTerEducGdp * upperMiddle + longCycleTerEducGdp * 
+##     upper, data = mydata, model = "random", index = c("country", 
+##     "year"))
+## 
+## Unbalanced Panel: n = 24, T = 2-5, N = 112
+## 
+## Effects:
+##                  var std.dev share
+## idiosyncratic  1.128   1.062 0.049
+## individual    21.922   4.682 0.951
+## theta:
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##  0.8416  0.8991  0.8991  0.8962  0.8991  0.8991 
+## 
+## Residuals:
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+## -3.1622 -0.5727  0.0097 -0.0082  0.4074  4.7424 
+## 
+## Coefficients:
+##                                   Estimate Std. Error z-value  Pr(>|z|)    
+## (Intercept)                     21.8560861  3.8196595  5.7220 1.053e-08 ***
+## avRatio                         -0.0049815  0.1126745 -0.0442    0.9647    
+## adultEducTer                    -0.3866511  0.0757499 -5.1043 3.320e-07 ***
+## longCycleTerEducGdp              0.8955265  1.2799204  0.6997    0.4841    
+## lowerMiddle                     -3.4114260  2.2840731 -1.4936    0.1353    
+## upperMiddle                     -4.7202460  3.3349209 -1.4154    0.1570    
+## upper                           -6.9777424  4.5348831 -1.5387    0.1239    
+## longCycleTerEducGdp:lowerMiddle  1.9200580  1.6822837  1.1413    0.2537    
+## longCycleTerEducGdp:upperMiddle  1.5882666  2.6192883  0.6064    0.5443    
+## longCycleTerEducGdp:upper        3.2413634  3.3687059  0.9622    0.3359    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Total Sum of Squares:    227.08
+## Residual Sum of Squares: 130.95
+## R-Squared:      0.42341
+## Adj. R-Squared: 0.37253
+## Chisq: 70.6048 on 9 DF, p-value: 1.1587e-11
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Hausman test says use RANDOM}
+\end{Highlighting}
+\end{Shaded}
+
+Talk about accuracy (cannot reject null) I think intercept here means
+lower income, which would imply that it is significant for this level?!
+
+Talk about the 3 models together
+
+\hypertarget{table-with-stargazer}{%
+\section{Table with Stargazer}\label{table-with-stargazer}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\item
+  Model with controls
+\item
+  Model with controls + Long Cycle Tertiary Education Adjusted for GDPph
+\item
+  Model with controls + Long Cycle Tertiary Education Adjusted for GDPph
+  + the Income Dummy
+\item
+  Model with controls + Long Cycle Tertiary Education Adjusted for GDPph
+  + the Region Dummy
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(stargazer)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Please cite as:
+\end{verbatim}
+
+\begin{verbatim}
+##  Hlavac, Marek (2018). stargazer: Well-Formatted Regression and Summary Statistics Tables.
+\end{verbatim}
+
+\begin{verbatim}
+##  R package version 5.2.2. https://CRAN.R-project.org/package=stargazer
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{stargazer}\NormalTok{(modelControlF, modelLongCycleEducF, modelLongCycleTerEducIntIncomeALLR, modelLongCycleTerEducIntALLF, }\AttributeTok{type=}\StringTok{"text"}\NormalTok{, }\AttributeTok{header=}\ConstantTok{FALSE}\NormalTok{, }\AttributeTok{digits=}\DecValTok{2}\NormalTok{, }\AttributeTok{multicolumn =} \ConstantTok{FALSE}\NormalTok{,}
+          \AttributeTok{out=}\StringTok{"./tables/summarymodelLongCycleEduc.html"}\NormalTok{, }\AttributeTok{title=}\StringTok{"Summary Statistics"}\NormalTok{,}
+          \AttributeTok{notes =} \StringTok{"All the commands and algorithms are coded in R 4.0.3"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Summary Statistics
+## ================================================================================================================
+##                                                                 Dependent variable:                             
+##                                    -----------------------------------------------------------------------------
+##                                        unemployment          unemployment      unemployment     unemployment    
+##                                             (1)                   (2)              (3)              (4)         
+## ----------------------------------------------------------------------------------------------------------------
+## avRatio                                    0.002                 0.04             -0.005            0.07        
+##                                           (0.11)                (0.11)            (0.11)           (0.12)       
+##                                                                                                                 
+## adultEducTer                             -0.57***              -0.51***          -0.39***         -0.52***      
+##                                           (0.07)                (0.08)            (0.08)           (0.08)       
+##                                                                                                                 
+## longCycleTerEducGdp                                             2.41**             0.90             1.29        
+##                                                                 (1.03)            (1.28)           (7.30)       
+##                                                                                                                 
+## lowerMiddle                                                                       -3.41                         
+##                                                                                   (2.28)                        
+##                                                                                                                 
+## upperMiddle                                                                       -4.72                         
+##                                                                                   (3.33)                        
+##                                                                                                                 
+## upper                                                                             -6.98                         
+##                                                                                   (4.53)                        
+##                                                                                                                 
+## longCycleTerEducGdp:lowerMiddle                                                    1.92                         
+##                                                                                   (1.68)                        
+##                                                                                                                 
+## longCycleTerEducGdp:upperMiddle                                                    1.59                         
+##                                                                                   (2.62)                        
+##                                                                                                                 
+## longCycleTerEducGdp:upper                                                          3.24                         
+##                                                                                   (3.37)                        
+##                                                                                                                 
+## longCycleTerEducGdp:southAmerica                                                                   -4.58        
+##                                                                                                    (8.49)       
+##                                                                                                                 
+## longCycleTerEducGdp:westernEurope                                                                   2.07        
+##                                                                                                    (9.52)       
+##                                                                                                                 
+## longCycleTerEducGdp:easternEurope                                                                   1.37        
+##                                                                                                    (7.32)       
+##                                                                                                                 
+## longCycleTerEducGdp:northernEurope                                                                 -6.70        
+##                                                                                                   (10.60)       
+##                                                                                                                 
+## longCycleTerEducGdp:oceania                                                                         4.76        
+##                                                                                                    (9.18)       
+##                                                                                                                 
+## Constant                                                                         21.86***                       
+##                                                                                   (3.82)                        
+##                                                                                                                 
+## ----------------------------------------------------------------------------------------------------------------
+## Observations                                119                   112              112              112         
+## R2                                         0.41                  0.46              0.42             0.48        
+## Adjusted R2                                0.24                  0.30              0.37             0.28        
+## F Statistic                        31.83*** (df = 2; 91) 24.41*** (df = 3; 85)   70.60***   9.35*** (df = 8; 80)
+## ================================================================================================================
+## Note:                                                                                *p<0.1; **p<0.05; ***p<0.01
+##                                                             All the commands and algorithms are coded in R 4.0.3
+\end{verbatim}
+
+\hypertarget{validity}{%
+\section{Validity}\label{validity}}
+
+\hypertarget{linearity}{%
+\subsection{Linearity}\label{linearity}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(}\AttributeTok{y=}\NormalTok{mydata}\SpecialCharTok{$}\NormalTok{unemployment, }\AttributeTok{x=}\NormalTok{mydata}\SpecialCharTok{$}\NormalTok{longCycleTerEducGdp)}
+\FunctionTok{abline}\NormalTok{(modelLongCycleEducF)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in abline(modelLongCycleEducF): only using the first two of 3 regression
+## coefficients
+\end{verbatim}
+
+\includegraphics{modelsOfInterest_files/figure-latex/unnamed-chunk-15-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#I tried to put the line of the model through but it did not work as it used only first 2 of three regression coefficients (since can\textquotesingle{}t plot in 3D)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#plot(y=modelLongCycleEducF$residuals, x=mydata$longCycleTerEducGdp)}
+
+\CommentTok{\#I cannot plot the residuals either because their are too many dimensions}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(modelLongCycleEducF}\SpecialCharTok{$}\NormalTok{residuals)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{modelsOfInterest_files/figure-latex/unnamed-chunk-17-1.pdf}
+
+see how it does in terms of accuracy measures (p-values and R2) with a
+quadratic transformation for instance.
+
+Model with long cycle tertiary education expenditure quadratic effect
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(plm)}
+\NormalTok{modelLongCycleEducQuadF }\OtherTok{\textless{}{-}} \FunctionTok{plm}\NormalTok{(unemployment }\SpecialCharTok{\textasciitilde{}}\NormalTok{  avRatio }\SpecialCharTok{+}\NormalTok{ adultEducTer }\SpecialCharTok{+}\NormalTok{ longCycleTerEducGdp }\SpecialCharTok{+} \FunctionTok{I}\NormalTok{(longCycleTerEducGdp)}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{, }\AttributeTok{data =}\NormalTok{ mydata, }\AttributeTok{index =} \FunctionTok{c}\NormalTok{(}\StringTok{"country"}\NormalTok{, }\StringTok{"year"}\NormalTok{), }\AttributeTok{model =} \StringTok{"within"}\NormalTok{)}
+
+
+\CommentTok{\#need fixed}
+\FunctionTok{summary}\NormalTok{(modelLongCycleEducQuadF)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Oneway (individual) effect Within Model
+## 
+## Call:
+## plm(formula = unemployment ~ avRatio + adultEducTer + longCycleTerEducGdp + 
+##     I(longCycleTerEducGdp)^2, data = mydata, model = "within", 
+##     index = c("country", "year"))
+## 
+## Unbalanced Panel: n = 24, T = 2-5, N = 112
+## 
+## Residuals:
+##        Min.     1st Qu.      Median     3rd Qu.        Max. 
+## -3.9970e+00 -4.3449e-01  8.4259e-05  4.4955e-01  3.4684e+00 
+## 
+## Coefficients: (1 dropped because of singularities)
+##                      Estimate Std. Error t-value Pr(>|t|)    
+## avRatio              0.039983   0.112240  0.3562  0.72255    
+## adultEducTer        -0.510615   0.078836 -6.4769 5.79e-09 ***
+## longCycleTerEducGdp  2.410667   1.033597  2.3323  0.02205 *  
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Total Sum of Squares:    188.01
+## Residual Sum of Squares: 100.99
+## R-Squared:      0.46284
+## Adj. R-Squared: 0.29853
+## F-statistic: 24.4132 on 3 and 85 DF, p-value: 1.7308e-11
+\end{verbatim}
+
+Here the quadratic term was dropped, implying there is no quadratic
+effect, meaning the model should be fairly linear, helping the validity
+of the model
+
+\hypertarget{nearly-normal-residuals}{%
+\subsection{Nearly Normal Residuals}\label{nearly-normal-residuals}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{hist}\NormalTok{(modelLongCycleEducF}\SpecialCharTok{$}\NormalTok{residuals)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{modelsOfInterest_files/figure-latex/unnamed-chunk-19-1.pdf}
+
+Looking at the histogram, the residuals do not seem skewed, however we
+can test to confirm this
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(e1071)}
+\FunctionTok{skewness}\NormalTok{(modelLongCycleEducF}\SpecialCharTok{$}\NormalTok{residuals)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] -0.1391781
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{2}\SpecialCharTok{*}\FunctionTok{sqrt}\NormalTok{(}\DecValTok{6}\SpecialCharTok{/}\FunctionTok{length}\NormalTok{(modelLongCycleEducF}\SpecialCharTok{$}\NormalTok{residuals))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.46291
+\end{verbatim}
+
+since our residuals g\_1 is smaller than 2*sqrt(6/n), the residuals are
+not skewed.
+
+From this, we can say that the residuals are not skewed, which
+strengthens model validity.
+
+\hypertarget{constant-variability}{%
+\subsection{Constant Variability}\label{constant-variability}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(lmtest)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: zoo
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'zoo'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:base':
+## 
+##     as.Date, as.Date.numeric
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{bptest}\NormalTok{(unemployment }\SpecialCharTok{\textasciitilde{}}\NormalTok{ avRatio }\SpecialCharTok{+}\NormalTok{ adultEducTer }\SpecialCharTok{+}\NormalTok{ longCycleTerEducGdp }\SpecialCharTok{+} \FunctionTok{factor}\NormalTok{(country), }\AttributeTok{data =}\NormalTok{ mydata, }\AttributeTok{studentize =}\NormalTok{ F)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Breusch-Pagan test
+## 
+## data:  unemployment ~ avRatio + adultEducTer + longCycleTerEducGdp +     factor(country)
+## BP = 182.21, df = 26, p-value < 2.2e-16
+\end{verbatim}
+
+it is called the Breusch-Pagan test (like the F-test) for H0 =
+homoskedasticity. Hence, if p-value is below 5\%, then
+heteroskedasticity.
+
+There is therefore heteroskedasticity since p-value \textless{} 2.2e-16
+\textless{} 0.05
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{coeftest}\NormalTok{(modelLongCycleEducF, }\FunctionTok{vcovHC}\NormalTok{(modelLongCycleEducF, }\AttributeTok{method =} \StringTok{"arellano"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## t test of coefficients:
+## 
+##                      Estimate Std. Error t value  Pr(>|t|)    
+## avRatio              0.039983   0.089783  0.4453  0.657214    
+## adultEducTer        -0.510615   0.119826 -4.2613 5.231e-05 ***
+## longCycleTerEducGdp  2.410667   0.840914  2.8667  0.005227 ** 
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+Since we have heteroskedasticity, a way to get the ``robust''
+coefficients once you run the plm() function is the coefficient test.
+This gives us a ``robust'' coefficient of 2.410667 that is significant
+at a 0.01 level
+
+The overall validity of the model is moderate, tests showed some
+confidence of linearity (no quadratic effect), no skewness but the
+presence of heteroskedasticity, which led us to perform a coefficient
+test giving us a robust coefficient of 2.410667
+
+\end{document}
