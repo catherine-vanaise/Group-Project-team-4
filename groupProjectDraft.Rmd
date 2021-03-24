@@ -1137,6 +1137,22 @@ summary(modelLongCycleTerEducIntUF)
 
 ```
 
+Model with only Long Cycle Tertiary Education and Unemployment
+
+```{r}
+m1F <- plm(unemployment ~  longCycleTerEducGdp,
+             data = mydata, index = c("country", "year"), model = "within")
+m1R <- plm(unemployment ~  longCycleTerEducGdp,
+             data = mydata, index = c("country", "year"), model = "random")
+phtest(m1F, m1R)
+
+#need fixed effects
+```
+
+```{r}
+plot(y=m1F$residuals, x=mydata$longCycleTerEducGdp)
+```
+
 ```{r}
 
 ```

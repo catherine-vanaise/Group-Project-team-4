@@ -1,13 +1,15 @@
 ---
-title: "Group Project Team 4"
+title: "Models of Interest"
 author: "Catherine Vanaise"
-date: "22/03/2021"
+date: "23/03/2021"
 output: html_document
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+
+# Preliminary models testing the hypotheses
 
 ```{r}
 #Loading the data
@@ -30,10 +32,11 @@ library(plm)
 We must first determine if we need a fixed-effects model to help remove the effects of time-invariant characteristics (such as the countries and years). If fixed-effects do affect the model, it is important to control for them to ensure that the model will then be truly measuring the impact of the independent variables on the dependent variable. 
 
 Considering the results of the Hausman test for all models that show a p-value lower than 0.05, we need a fixed-effects model.
-EXCEPT: Models with income dummy for Primary and Long Cycle Tertiary Education
-ALL others show the need for the fixed effects
+EXCEPT: Model with long cycle tertiary education with income dummy (should use random)
+(other models with income suggest using random, but we do not study them here)
 
-Model with control variables only
+
+## Model with control variables only
 
 ```{r}
 modelControlF <- plm(unemployment ~  avRatio + adultEducTer,
@@ -46,7 +49,9 @@ phtest(modelControlF, modelControlR)
 summary(modelControlF)
 ```
 
-Model with primary education expenditure
+Talk about accuracy of controls
+
+## Model with primary education expenditure
 
 ```{r}
 modelPrimEducF <- plm(unemployment ~  avRatio + adultEducTer + primEducGdp,
@@ -59,7 +64,9 @@ phtest(modelPrimEducF, modelPrimEducR)
 summary(modelPrimEducF)
 ```
 
-Model with lower secondary education expenditure
+Talk about accuracy (cannot reject null)
+
+## Model with lower secondary education expenditure
 
 ```{r}
 modelLowSecEducF <- plm(unemployment ~  avRatio + adultEducTer + lowSecEducGdp,
@@ -72,7 +79,9 @@ phtest(modelLowSecEducF, modelLowSecEducR)
 summary(modelLowSecEducF)
 ```
 
-Model with upper secondary education expenditure
+Talk about accuracy (cannot reject null)
+
+## Model with upper secondary education expenditure
 
 ```{r}
 modelUpSecEducF <- plm(unemployment ~  avRatio + adultEducTer + upSecEducGdp,
@@ -85,7 +94,9 @@ phtest(modelUpSecEducF, modelUpSecEducR)
 summary(modelUpSecEducF)
 ```
 
-# Model with long cycle tertiary education expenditure
+Talk about accuracy (cannot reject null)
+
+## Model with long cycle tertiary education expenditure
 
 ```{r}
 modelLongCycleEducF <- plm(unemployment ~  avRatio + adultEducTer + longCycleTerEducGdp,
@@ -98,8 +109,9 @@ phtest(modelLongCycleEducF, modelLongCycleEducR)
 summary(modelLongCycleEducF)
 ```
 
+Talk about accuracy (reject null)
 
-Region
+# Region Dummy
 
 ```{r}
 library(tidyverse)
@@ -118,51 +130,19 @@ mydata <- mydata %>% mutate(oceania = case_when(region == "Oceania" ~ 1
 #middle east is with none of these (0 for all)
 ```
 
-Model with primary education with region dummy
-
-```{r}
-modelPrimEducIntALLF <- plm(unemployment ~  avRatio + adultEducTer + primEducGdp*northAmerica +primEducGdp*southAmerica + primEducGdp*westernEurope + primEducGdp*easternEurope + primEducGdp*northernEurope + primEducGdp*oceania,
-             data = mydata, index = c("country", "year"), model = "within")
-
-#need fixed
-summary(modelPrimEducIntALLF)
-
-```
-
-Model with lower secondary education with region dummy
-
-```{r}
-modelLowSecEducIntALLF <- plm(unemployment ~  avRatio + adultEducTer + lowSecEducGdp*northAmerica + lowSecEducGdp*southAmerica + lowSecEducGdp*westernEurope + lowSecEducGdp*easternEurope + lowSecEducGdp*northernEurope + lowSecEducGdp*oceania,
-             data = mydata, index = c("country", "year"), model = "within")
-
-#need fixed
-summary(modelLowSecEducIntALLF)
-
-```
-
-Model with upper secondary education with region dummy
-
-```{r}
-modelUpSecEducIntALLF <- plm(unemployment ~  avRatio + adultEducTer + upSecEducGdp*northAmerica + upSecEducGdp*southAmerica + upSecEducGdp*westernEurope + upSecEducGdp*easternEurope + upSecEducGdp*northernEurope + upSecEducGdp*oceania,
-             data = mydata, index = c("country", "year"), model = "within")
-
-#need fixed
-summary(modelUpSecEducIntALLF)
-
-```
-
-Model with long cycle tertiary education with region dummy
+## Model with long cycle tertiary education with region dummy (to compare with the significant model)
 
 ```{r}
 modelLongCycleTerEducIntALLF <- plm(unemployment ~  avRatio + adultEducTer + longCycleTerEducGdp*northAmerica + longCycleTerEducGdp*southAmerica + longCycleTerEducGdp*westernEurope + longCycleTerEducGdp*easternEurope + longCycleTerEducGdp*northernEurope + longCycleTerEducGdp*oceania,
              data = mydata, index = c("country", "year"), model = "within")
 
-#need fixed
 summary(modelLongCycleTerEducIntALLF)
+
 ```
 
+Talk about accuracy (cannot reject null)
 
-Income
+# Income
 
 ```{r}
 quantile(mydata$gdpph, probs = c(0, 0.25, 0.5, 0.75, 1))
@@ -180,57 +160,7 @@ mydata$upper<-0
 mydata$upper[mydata$gdpph>=43618.75&mydata$gdpph<=87496]<-1
 ```
 
-
-Model with primary education with income dummy
-
-```{r}
-modelPrimEducIntIncomeALLF <- plm(unemployment ~  avRatio + adultEducTer + primEducGdp*lowerMiddle +primEducGdp*upperMiddle + primEducGdp*upper,
-             data = mydata, index = c("country", "year"), model = "within")
-
-modelPrimEducIntIncomeALLR <- plm(unemployment ~  avRatio + adultEducTer + primEducGdp*lowerMiddle +primEducGdp*upperMiddle + primEducGdp*upper,
-             data = mydata, index = c("country", "year"), model = "random")
-
-phtest(modelPrimEducIntIncomeALLF, modelPrimEducIntIncomeALLR)
-
-#do not need fixed effects!!!!
-summary(modelPrimEducIntIncomeALLR)
-
-```
-
-Model with lower secondary education with income dummy
-
-```{r}
-modelLowSecEducIntIncomeALLF <- plm(unemployment ~  avRatio + adultEducTer + lowSecEducGdp*lowerMiddle + lowSecEducGdp*upperMiddle + lowSecEducGdp*upper,
-             data = mydata, index = c("country", "year"), model = "within")
-
-modelLowSecEducIntIncomeALLR <- plm(unemployment ~  avRatio + adultEducTer + lowSecEducGdp*lowerMiddle + lowSecEducGdp*upperMiddle + lowSecEducGdp*upper,
-             data = mydata, index = c("country", "year"), model = "random")
-
-phtest(modelLowSecEducIntIncomeALLF, modelLowSecEducIntIncomeALLR)
-
-#need fixed
-summary(modelLowSecEducIntIncomeALLF)
-
-```
-
-Model with upper secondary education with income dummy
-
-```{r}
-modelUpSecEducIntIncomeALLF <- plm(unemployment ~  avRatio + adultEducTer + upSecEducGdp*lowerMiddle + upSecEducGdp*upperMiddle + upSecEducGdp*upper,
-             data = mydata, index = c("country", "year"), model = "within")
-
-modelUpSecEducIntIncomeALLR <- plm(unemployment ~  avRatio + adultEducTer + upSecEducGdp*lowerMiddle + upSecEducGdp*upperMiddle + upSecEducGdp*upper,
-             data = mydata, index = c("country", "year"), model = "random")
-
-phtest(modelUpSecEducIntIncomeALLF, modelUpSecEducIntIncomeALLR)
-
-#need fixed
-
-summary(modelUpSecEducIntIncomeALLF)
-
-```
-
-Model with long cycle tertiary education with income dummy
+## Model with long cycle tertiary education with income dummy
 
 ```{r}
 modelLongCycleTerEducIntIncomeALLF <- plm(unemployment ~  avRatio + adultEducTer + longCycleTerEducGdp*lowerMiddle + longCycleTerEducGdp*upperMiddle + longCycleTerEducGdp*upper,
@@ -240,24 +170,112 @@ modelLongCycleTerEducIntIncomeALLR <- plm(unemployment ~  avRatio + adultEducTer
              data = mydata, index = c("country", "year"), model = "random")
 
 phtest(modelLongCycleTerEducIntIncomeALLF, modelLongCycleTerEducIntIncomeALLR)
-
-#DO NOT need fixed
 summary(modelLongCycleTerEducIntIncomeALLR)
-
-#I think intercept here means lower income, which would imply that it is significant for this level?
+#Hausman test says use RANDOM
 
 ```
 
+Talk about accuracy (cannot reject null)
+I think intercept here means lower income, which would imply that it is significant for this level?!
 
 
+Talk about the 3 models together
 
+
+# Table with Stargazer
+
+1) Model with controls
+
+2) Model with controls + Long Cycle Tertiary Education Adjusted for GDPph
+
+3) Model with controls + Long Cycle Tertiary Education Adjusted for GDPph + the Income Dummy
+
+4) Model with controls + Long Cycle Tertiary Education Adjusted for GDPph + the Region Dummy
 
 
 ```{r}
 
+library(stargazer)
+
+stargazer(modelControlF, modelLongCycleEducF, modelLongCycleTerEducIntIncomeALLR, modelLongCycleTerEducIntALLF, type="text", header=FALSE, digits=2, multicolumn = FALSE,
+          out="./tables/summarymodelLongCycleEduc.html", title="Summary Statistics",
+          notes = "All the commands and algorithms are coded in R 4.0.3")
+```
+
+# Validity
+
+## Linearity
+
+```{r}
+plot(y=mydata$unemployment, x=mydata$longCycleTerEducGdp)
+abline(modelLongCycleEducF)
+
+#I tried to put the line of the model through but it did not work as it used only first 2 of three regression coefficients (since can't plot in 3D)
 ```
 
 ```{r}
+plot(y=modelLongCycleEducF$residuals, x=mydata$longCycleTerEducGdp)
 
+#I cannot plot the residuals either because their are too many dimensions
 ```
+
+
+```{r}
+plot(modelLongCycleEducF$residuals)
+```
+
+see how it does in terms of accuracy measures (p-values and R2) with a quadratic transformation for instance.
+
+Model with long cycle tertiary education expenditure quadratic effect
+
+```{r}
+library(plm)
+modelLongCycleEducQuadF <- plm(unemployment ~  avRatio + adultEducTer + longCycleTerEducGdp + I(longCycleTerEducGdp)^2, data = mydata, index = c("country", "year"), model = "within")
+
+
+#need fixed
+summary(modelLongCycleEducQuadF)
+```
+
+Here the quadratic term was dropped, implying there is no quadratic effect, meaning the model should be fairly linear, helping the validity of the model
+
+## Nearly Normal Residuals
+
+```{r}
+hist(modelLongCycleEducF$residuals)
+```
+
+Looking at the histogram, the residuals do not seem skewed, however we can test to confirm this
+
+```{r}
+library(e1071)
+skewness(modelLongCycleEducF$residuals)
+2*sqrt(6/length(modelLongCycleEducF$residuals))
+```
+
+since our residuals g_1 is smaller than 2*sqrt(6/n), the residuals are not skewed. 
+
+From this, we can say that the residuals are not skewed, which strengthens model validity.
+
+## Constant Variability
+
+```{r}
+library(lmtest)
+bptest(unemployment ~ avRatio + adultEducTer + longCycleTerEducGdp + factor(country), data = mydata, studentize = F)
+```
+
+it is called the Breusch-Pagan test (like the F-test) for H0 = homoskedasticity. Hence, if p-value is below 5%, then heteroskedasticity. 
+
+There is therefore heteroskedasticity since p-value < 2.2e-16 < 0.05
+
+```{r}
+coeftest(modelLongCycleEducF, vcovHC(modelLongCycleEducF, method = "arellano"))
+```
+
+Since we have heteroskedasticity, a way to get the "robust" coefficients once you run the plm() function is the coefficient test. This gives us a "robust" coefficient of 2.410667 that is significant at a 0.01 level
+
+
+The overall validity of the model is moderate, tests showed some confidence of linearity (no quadratic effect), no skewness but the presence of heteroskedasticity, which led us to perform a coefficient test giving us a robust coefficient of 2.410667
+
+
 
