@@ -278,4 +278,24 @@ Since we have heteroskedasticity, a way to get the "robust" coefficients once yo
 The overall validity of the model is moderate, tests showed some confidence of linearity (no quadratic effect), no skewness but the presence of heteroskedasticity, which led us to perform a coefficient test giving us a robust coefficient of 2.410667
 
 
+```{r}
+library(lmtest)
+# Nested models
+waldtest(modelLongCycleEducF, modelLongCycleTerEducIntIncomeALLF, test = "F")
+```
+
+```{r}
+library(lmtest)
+# Nested models
+waldtest(modelLongCycleEducF,modelLongCycleTerEducIntALLF)
+```
+
+```{r}
+summary.matrix(mydata)
+```
+
+
+
+
+
 
