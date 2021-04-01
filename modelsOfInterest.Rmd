@@ -295,6 +295,22 @@ summary.matrix(mydata)
 ```
 
 
+```{r}
+library(dplyr)
+mydata %>% filter(lowerMiddle == 1) %>% nrow()
+#for lower middle, 32 years across countries were in this category
+
+mydata %>% filter(upperMiddle == 1) %>% nrow()
+#for upper middle, 32 years across countries were in this category
+
+mydata %>% filter(upper == 1) %>% nrow()
+#for upper, 33 years across countries were in this category
+
+mydata %>% filter(upper == 0) %>% filter(lowerMiddle == 0) %>% filter(upperMiddle ==0) %>% nrow()
+#for lower, 33 years across countries were in this category
+
+```
+
 
 
 
