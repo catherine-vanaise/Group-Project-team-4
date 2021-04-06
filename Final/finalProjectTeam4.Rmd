@@ -19,6 +19,9 @@ The work is divided in the following sections: first, a literature review is pre
 
 The analysis did not show any significant results for the impact of expenditures at the first three levels of education and found a positive relationship between long-cycle tertiary education expenditures and unemployment, suggesting that the more governments spend in Bachelor, Master and PhD programs, the higher the level of unemployment. This particular outcome could be justified by the fact that the greater the outlays in education at these levels, the higher the qualified labour supply which, if not equally matched by labour demand, could lead to the upsurge of unemployment. 
 
+Based on this context, our research question is: how do government expenditures in different schooling levels impact on unemployment in OECD countries?
+
+
 # Literature Review
 
 ## The Relationship Between Education and Economic Growth 
@@ -65,7 +68,7 @@ Investment in primary education depends on the proportion of young males and fem
 
 *Hypothesis 1: Higher government investments in primary education will lead to lower unemployment rates.* 
 
-## Lower secondary education
+## Lower Secondary Education
 
 Lower secondary education provides the basics of education in a more specialist way than the primary level. The typical duration is three years, and, in some countries, it represents the final step of compulsory education. On average, across OECD countries, less than 3% of youth are out of school in primary and lower secondary education. The fourth Sustainable Development Goal of the UN focuses on the importance of education and learning to shape a sustainable future, stressing the necessity to provide investments in education. The lower secondary education is particularly relevant for its impact on pupils’ future education; according to Michaelowa (2007), there is a positive relationship between the quality of secondary and tertiary education. 
 
@@ -73,7 +76,7 @@ Therefore, ensuring a smooth transition from lower to upper secondary education 
 
 *Hypothesis 2: Higher government investments in lower secondary education will lead to lower unemployment rates.*
 
-## Upper secondary education
+## Upper Secondary Education
 
 According to the definition of the OECD (2020), upper secondary education provides a higher specialisation than at lower secondary level. The attainment of this level of education has become a minimum requirement to be competitive in the modern labor market. Compared to their higher-educated peers, young people who leave school before the competition of the upper secondary education not only have lower job opportunities but tend to have lower social connectedness (OECD, 2019). As primary education, secondary education is perceived as a standard public good and for this reason, a fair amount of governments’ resources must be devoted to its development. Clearly, it is important for the government to verify whether the costs of its investments will be recovered. Since an upper secondary education offers good prospects of employability and tends to translate into higher earnings, governments will be able to receive higher tax income and social contributions. Therefore, we propose the following hypothesis: 
 
@@ -95,11 +98,11 @@ We decided to limit the scope of our analysis to the period from 2013 to 2017 si
 
 All data were collected from the OECD database to ensure coherent measurements, being from the same organization. For detailed explanations demonstrating paths and filters to obtain data, see *Appendix (X)*. 
 
-## Dependent variable
+## Dependent Variable
 
 Our dependent variable is the level of unemployment. It is measured as the percentage of the population aged between 24 and 64 years of age that is without employment.  
 
-## Independent variables
+## Independent Variables
 
 We consider four independent variables, whose impact on the level on unemployment is tested in the models. The first one is the level of total expenditure in primary education (ISCED2011 level 1); the second one is the level of total expenditure in lower secondary education (ISCED2011 level 2); the third variable is the level of total expenditure in upper secondary education (ISCED2011 level 3); the fourth and last one is the level of total expenditure in long cycle tertiary education (ISCED2011 levels 6 to 8). They are all included in the model as percentage of the GDP of the specific country in order to normalize with respect to the economic development of the different nations. They individually measure the amount of USD invested by all public and private institutions in their specific grade of schooling – primary, lower and upper secondary, bachelor, master and PhD respectively – as percentage of the total gross domestic product. Since the values at the numerator are reported in US dollars at purchasing power parity as the denominator, we obtained coherent percentage values. We expect to find a positive relationship between these independent variables and unemployment rates.  
 
@@ -109,15 +112,15 @@ Based on the literature, factors other than our four levels of education expendi
 
 We did not control for GDP per capita despite it is reasonable to assume that wealthier countries will spend more in education as they have more savings at their disposal, since we have already included this measure in the independent variables’ definition.
 
-## Categorical variables
+## Categorical Variables
 
 We identified two main categorical variables. The first ones classify countries by their geographical region—South America, North America, Western Europe, Eastern Europe, Northern Europe, Middle East and Oceania. We did not distinguish Southern Europe as the three countries that formally belong to this group—Italy, Spain and Greece—could be grouped in the previously defined categories. In this case, the base category is Middle East. 
 
 Concerning the second group of categorical variables we decided to classify countries by their level of income, according to the GDP per capita. Since, by the classification of The World Bank (2021), they all belong to the high-income cluster, we proceeded with a further division by quartiles and to each of them we associated low-, lower middle-, upper middle-, and upper-income categories. In this case, the base category is represented by low-income countries. 
 
-# Data analysis
+# Data Analysis
 
-## Explanatory data analysis
+## Explanatory Data Analysis
 
 In *table X* a brief summary of our variables is presented, and some key characteristics of the data’s distribution are provided. Starting with the dependent variable—unemployment—the average rate among the 26 countries in the five years under focus is 8.49%, with an interesting minimum value of 2.8% in Iceland in 2017, and a disastrous maximum rate of 27.5% in Greece in 2013, justified by the prolonged crisis that affected the country. Looking at the independent variables, it is relevant to highlight that the primary education is the schooling level in which governments spend the highest percentage of GDP, compared to other levels. The mean of the variable is 1.3% and its maximum is 2.5%; whilst for lower-secondary education they are 0.9% and 1.3% respectively; for upper-secondary education they are 0.97% and 1.63% respectively; for long-cycle tertiary they are 1.28% and 2.05% respectively. Finally, we focus on the continuous control variables. The mean of the average student-teacher ratio is 13.64, meaning that on average, in the countries of our dataset, for each teacher—no matter the educational level—follows 13 students. We must point out that the average of student-teacher ratio is the lowest in lower-secondary education (11.92) and the highest in long-cycle tertiary (15.8). Concerning the educational attainment, the countries’ mean is 34%, implying that on average, in the 26 countries of the sample, 34% of the population has concluded tertiary education. The minimum value is 16.3% in Italy in 2013, and the maximum is 50.9% in Israel in 2017. If associated with unemployment rates, this data highlights that in countries where people are more educated, unemployment rates are lower – i.e., in Israel, to 50.9% tertiary attainment is associated with an unemployment rate of 4.2% in the same year, whilst in Italy to 16.3% the unemployment was 12.1% in the same year.
 
@@ -222,14 +225,14 @@ stargazer(modelControlF, modelLongCycleEducF, modelLongCycleTerEducIntIncomeALLR
 
 From the previous results, we concluded that the unique model which provides us with significant outcomes is model (3). It is important to test its validity, hence whether we collected the right data. To do so we looked at three conditions: linearity, distribution and variability of residuals.  
 
-Concerning the linearity conditions, plotting model (3) in a Cartesian plane, except for some outliers, the relationship resembled a linear one. To be more confident, we decided to test the quadratic effect. However, the quadratic term was dropped, implying that its effect is null. Hence the model should be linear, increasing its validity. 
+Concerning the linearity conditions, plotting model (3) in a Cartesian plane, except for some outliers, the relationship resembled a linear one (Figure 1). To be more confident, we decided to test the quadratic effect. However, the quadratic term was dropped, implying that its effect is null. Hence the model should be linear, increasing its validity. 
 
-To test the distribution of the residuals, they have been plotted in a histogram which represented symmetric residuals around zero. The skewness test gave a g_1 for our residuals smaller than the theoretical threshold 2√6⁄n. This confirmed our first impression from the graph, that there is no skewness, strengthening model’s validity.  
+To test the distribution of the residuals, they have been plotted in a histogram which represented symmetric residuals around zero (Figure 2). The skewness test gave a g_1 for our residuals smaller than the theoretical threshold 2√6⁄n. This confirmed our first impression from the graph, that there is no skewness, strengthening model’s validity.  
 
 The last condition to be verified was the residuals’ homoskedasticity. We applied the Breusch-Pagan test which gave us a p-value of 2.2e-16 which is much lower the 5% significance level, implying heteroskedasticity. Heteroskedasticity might deeply affect the validity of our findings, however a way to obtain robust coefficients is through the t-test on the latter. Since we obtained a significant beta for our dependent variable in model (3), we were able to mitigate this limitation. 
 To conclude, the overall validity of the model was moderate: the tests showed some confidence of linearity, no skewness but the presence of heteroskedasticity. 
 
-###Figure 1
+### Figure 1: Relationship Between Long Cycle Tertiary Education Expenditures and Unemployment
 
 ```{r}
 plot(mydata$longCycleTerEducGdp, mydata$unemployment, xlab = "Long Cycle Tertiary Education", ylab = "Unemployment")
@@ -237,10 +240,10 @@ m1 <- plm(unemployment ~ longCycleTerEducGdp, data=mydata)
 abline(m1)
 ```
 
-### Figure 2
+### Figure 2: Histogram of Residuals
 
 ```{r}
-hist(modelLongCycleEducF$residuals, main = "Histogram of Residuals", xlab= "Residuals of Long Cycle Tertiary Education Model")
+hist(modelLongCycleEducF$residuals, main = "", xlab= "Residuals of Long Cycle Tertiary Education Model")
 
 ```
 
@@ -257,13 +260,17 @@ coeftest(modelLongCycleEducF, vcovHC(modelLongCycleEducF, method = "arellano"))
 ```
 
 
-# Discussion of results
+# Discussion of Results
 
-From the data analysis just presented it can be concluded that none of our initial hypotheses can be accepted. Indeed, data do not show any significant relationship between governmental spending in primary, lower- and upper-secondary education and unemployment rate. They only highlight a significant and—opposite from what expected—positive relationship between long-cycle tertiary education expenditures and unemployment rates. The results might seem discouraging initially, but we had the opportunity to gain important insights. First, despite the imperative to provide and spend in lower grades of schooling, the effects of these investments are not directly captured by unemployment levels. Following, the positive relationship between unemployment rates and outlays in long-cycle tertiary education might appear counter-intuitive. However, it tells us that countries which spend more in higher education for more educated individuals who put upward pressure to labour supply. If the latter is not matched by a sufficient labour demand, it leads to an increase in unemployment rates, which is the exact mechanism experienced in the countries of our sample.
+From the data analysis just presented it can be concluded that none of our initial hypotheses can be accepted. Indeed, data do not show any significant relationship between governmental spending in primary, lower- and upper-secondary education and unemployment rate. They only highlight a significant and—opposite from what expected—positive relationship between long-cycle tertiary education expenditures and unemployment rates. The results might seem discouraging initially, and no policy recommendations could be elaborated, however, we had the opportunity to gain important insights. First, despite the imperative to provide and spend in lower grades of schooling, the effects of these investments are not directly captured by unemployment levels. Following, the positive relationship between unemployment rates and outlays in long-cycle tertiary education might appear counter-intuitive. However, it tells us that countries which spend more in higher education for more educated individuals who put upward pressure to labour supply. If the latter is not matched by a sufficient labour demand, it leads to an increase in unemployment rates, which is the exact mechanism experienced in the countries of our sample.
 
 # Conclusions
 
+## Limitations
+
 Our study shows some limitations. Firstly, data were not available for all the OECD countries and, therefore, we were forced to restrict our analysis to just 26 of them and for the period between 2013-2017. This led us to further limitations when considering possible division among countries, all of them being categorized as high-income by the World Bank. Moreover, our study being one of the firsts to focus on governmental expenditures broken down by different schooling levels, we decided not to distinguish unemployment among different ages but to consider general levels for the workers aged 25-64. Nonetheless, it is too broad of a group, and it is likely subjected to other factors apart from government spending in education.
+
+## Further Research
 
 Hence, for further research, we suggest broadening the time frame, and considering a greater sample of countries—from various regions and with different levels of income—to increase the generalizability of the study. Secondly, future analysis should consider as a dependent variable a smaller percentage of the working population, preferably focusing on younger individuals to better assess the real impact of expenditures on their hiring possibilities. Lastly, different types of relationships could be investigated – i.e., the logarithmic form. 
 
