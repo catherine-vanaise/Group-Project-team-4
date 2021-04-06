@@ -24,8 +24,7 @@ knitr::opts_chunk$set(echo = FALSE)
 # Background
 Unemployment levels are constantly under the spotlight of governments, as signals of the economic stability of countries and of the effectiveness of the policies they implement. It is conventionally believed that the acquisition of skills enhances the possibilities of getting hired (Grimaccia & Lima, 2013). Previous investigated three important relationships: 
 
-PUT IMMAGINE2 HERE
-
+![](./Immagine2.png)
 
 
 
@@ -53,8 +52,7 @@ The aim of our research is to assess whether the expenditure in education is neg
 We used panel data gathered from the OECD.Stat, which reports data from the 38 OECD members. We included only 26 countries in our sample as 12 of the countries were missing too much information to be properly analyzed. This samples allows for a cross country analysis. 
 
 
-I WOULD PUT A TABLE WITH THE COUNTRIES CHOSEN I
-Australia, Austria, Belgium, Chile, Czech Republic, Estonia, France, Germany, Greece, Hungary, Iceland, Ireland, Israel, Italy, Latvia, Lithuania, Luxemburg, the Netherlands, New Zealand, Poland, Slovak Republic, Slovenia, Spain, Sweden, the United-Kingdom and the United-States. 
+![](./Table of countries.jpeg)
 
 Despite the sample of OECD countries being downsized, we were careful to maintain geographical heterogeneity.   
 We decided to limit the scope of our analysis to the period from 2013 to 2017 since they were the five most recent years available.  
