@@ -213,9 +213,10 @@ waldtest(modelLongCycleEducF, modelLongCycleTerEducIntALLF, test = "F")
 ```{r}
 library(stargazer)
 
-stargazer(modelControlF, modelLongCycleEducF, modelLongCycleTerEducIntIncomeALLR, modelLongCycleTerEducIntALLF, type="text", header=FALSE, digits=2, multicolumn = FALSE, out="./tables/summarymodelLongCycleEduc.html", title="Summary Statistics",
+stargazer(modelControlF, modelLongCycleEducF, modelLongCycleTerEducIntIncomeALLR, modelLongCycleTerEducIntALLF, type="text", header=FALSE, digits=2, multicolumn = FALSE, out="./table/summarymodelLongCycleEduc.html", title="Summary Statistics",
           notes = "All the commands and algorithms are coded in R 4.0.3")
 ```
+
 
 ## Validity
 
@@ -228,7 +229,15 @@ To test the distribution of the residuals, they have been plotted in a histogram
 The last condition to be verified was the residuals’ homoskedasticity. We applied the Breusch-Pagan test which gave us a p-value of 2.2e-16 which is much lower the 5% significance level, implying heteroskedasticity. Heteroskedasticity might deeply affect the validity of our findings, however a way to obtain robust coefficients is through the t-test on the latter. Since we obtained a significant beta for our dependent variable in model (3), we were able to mitigate this limitation. 
 To conclude, the overall validity of the model was moderate: the tests showed some confidence of linearity, no skewness but the presence of heteroskedasticity. 
 
-### Figure 1
+###Figure 1
+
+```{r}
+plot(mydata$longCycleTerEducGdp, mydata$unemployment, xlab = "Long Cycle Tertiary Education", ylab = "Unemployment")
+m1 <- plm(unemployment ~ longCycleTerEducGdp, data=mydata)
+abline(m1)
+```
+
+### Figure 2
 
 ```{r}
 hist(modelLongCycleEducF$residuals, main = "Histogram of Residuals", xlab= "Residuals of Long Cycle Tertiary Education Model")
