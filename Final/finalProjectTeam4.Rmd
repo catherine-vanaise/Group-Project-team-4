@@ -96,7 +96,7 @@ Therefore, we propose the following hypothesis:
 We tested the hypotheses using panel data gathered from the OECD. Stat, which reports data from the 38 members of the homonym organization. However, we included only 26 countries in our sample as 12 of the countries were missing too much information to be properly analyzed. This samples allows for a cross country analysis. In more detail, the sample is constituted of Australia, Austria, Belgium, Chile, Czech Republic, Estonia, France, Germany, Greece, Hungary, Iceland, Ireland, Israel, Italy, Latvia, Lithuania, Luxemburg, the Netherlands, New Zealand, Poland, Slovak Republic, Slovenia, Spain, Sweden, the United-Kingdom and the United-States. Despite the sample of OECD countries being downsized, we were careful to maintain geographical heterogeneity.   
 We decided to limit the scope of our analysis to the period from 2013 to 2017 since they were the five most recent years available.  
 
-All data were collected from the OECD database to ensure coherent measurements, being from the same organization. For detailed explanations demonstrating paths and filters to obtain data, see *Appendix (X)*. 
+All data were collected from the OECD database to ensure coherent measurements, being from the same organization. For detailed explanations demonstrating paths and filters to obtain data, see *Appendix 1*. 
 
 ## Dependent Variable
 
@@ -122,9 +122,11 @@ Concerning the second group of categorical variables we decided to classify coun
 
 ## Explanatory Data Analysis
 
-In *table X* a brief summary of our variables is presented, and some key characteristics of the data’s distribution are provided. Starting with the dependent variable—unemployment—the average rate among the 26 countries in the five years under focus is 8.49%, with an interesting minimum value of 2.8% in Iceland in 2017, and a disastrous maximum rate of 27.5% in Greece in 2013, justified by the prolonged crisis that affected the country. Looking at the independent variables, it is relevant to highlight that the primary education is the schooling level in which governments spend the highest percentage of GDP, compared to other levels. The mean of the variable is 1.3% and its maximum is 2.5%; whilst for lower-secondary education they are 0.9% and 1.3% respectively; for upper-secondary education they are 0.97% and 1.63% respectively; for long-cycle tertiary they are 1.28% and 2.05% respectively. Finally, we focus on the continuous control variables. The mean of the average student-teacher ratio is 13.64, meaning that on average, in the countries of our dataset, for each teacher—no matter the educational level—follows 13 students. We must point out that the average of student-teacher ratio is the lowest in lower-secondary education (11.92) and the highest in long-cycle tertiary (15.8). Concerning the educational attainment, the countries’ mean is 34%, implying that on average, in the 26 countries of the sample, 34% of the population has concluded tertiary education. The minimum value is 16.3% in Italy in 2013, and the maximum is 50.9% in Israel in 2017. If associated with unemployment rates, this data highlights that in countries where people are more educated, unemployment rates are lower – i.e., in Israel, to 50.9% tertiary attainment is associated with an unemployment rate of 4.2% in the same year, whilst in Italy to 16.3% the unemployment was 12.1% in the same year.
+In *table 1* a brief summary of our variables is presented, and some key characteristics of the data’s distribution are provided. Starting with the dependent variable—unemployment—the average rate among the 26 countries in the five years under focus is 8.49%, with an interesting minimum value of 2.8% in Iceland in 2017, and a disastrous maximum rate of 27.5% in Greece in 2013, justified by the prolonged crisis that affected the country. Looking at the independent variables, it is relevant to highlight that the primary education is the schooling level in which governments spend the highest percentage of GDP, compared to other levels. The mean of the variable is 1.3% and its maximum is 2.5%; whilst for lower-secondary education they are 0.9% and 1.3% respectively; for upper-secondary education they are 0.97% and 1.63% respectively; for long-cycle tertiary they are 1.28% and 2.05% respectively. Finally, we focus on the continuous control variables. The mean of the average student-teacher ratio is 13.64, meaning that on average, in the countries of our dataset, for each teacher—no matter the educational level—follows 13 students. We must point out that the average of student-teacher ratio is the lowest in lower-secondary education (11.92) and the highest in long-cycle tertiary (15.8). Concerning the educational attainment, the countries’ mean is 34%, implying that on average, in the 26 countries of the sample, 34% of the population has concluded tertiary education. The minimum value is 16.3% in Italy in 2013, and the maximum is 50.9% in Israel in 2017. If associated with unemployment rates, this data highlights that in countries where people are more educated, unemployment rates are lower – i.e., in Israel, to 50.9% tertiary attainment is associated with an unemployment rate of 4.2% in the same year, whilst in Italy to 16.3% the unemployment was 12.1% in the same year.
 
 Finally, we made a summary of the categorical variables. Concerning the distinction by income level, our 130 observations fall homogeneously in the four categories. Indeed, we had 33,32,32,33 observations for lower, lower-middle, upper-middle and upper income respectively. It is important to highlight that, since we considered a period of five years, some countries have experienced fluctuations of their income levels, measured by GDP per capita. Therefore, in some cases, they changed their categories from one year to another. For example, Italy was classified as lower-middle in 2013, 2014, 2015, 2016 and changed to upper-middle in 2017. As regard the geographical categorization, we had 9,1,1,4,2,1,8 countries in Eastern Europe, Middle East, North America, Northern Europe, Oceania, South America and Western Europe.  
+
+### Summary Statistics
 
 *TABLE OF SUMMARY STATISTICS*
 
@@ -132,7 +134,7 @@ Finally, we made a summary of the categorical variables. Concerning the distinct
 
 Our 130 observations are arranged in form of panel data and we used time-series cross-section-based estimation techniques. 
 
-Before regressing the models, we checked whether we needed a fixed-effects or a random-effects model, performing the Hausman test. In all the models summarized in *TABLE X*, except for the third one, the test showed a p-value lower 0.05, confirming the need of the fixed effect. For model (3), we used random effect instead. This passage is crucial to remove the effects of time-invariant characteristics and to ensure that the models are truly measuring the impact of the independent variables on the dependent one.  
+Before regressing the models, we checked whether we needed a fixed-effects or a random-effects model, performing the Hausman test. In all the models summarized in *Table 2*, except for the third one, the test showed a p-value lower 0.05, confirming the need of the fixed effect. For model (3), we used random effect instead. This passage is crucial to remove the effects of time-invariant characteristics and to ensure that the models are truly measuring the impact of the independent variables on the dependent one.  
 We started by running model (1) which comprised just the control variables. It highlighted that the level of education attainment is significant at a 99% level (p-value = 7.47e-12), with an attractive accuracy—R-squared of 41.16%. 
 
 We proceeded by adding to the previous model the independent variables one by one.  
@@ -213,12 +215,14 @@ waldtest(modelLongCycleEducF, modelLongCycleTerEducIntALLF, test = "F")
 
 4) Model with controls + Long Cycle Tertiary Education Adjusted for GDP per head + the Region Division
 
-```{r}
+```{r, include=FALSE}
 library(stargazer)
 
 stargazer(modelControlF, modelLongCycleEducF, modelLongCycleTerEducIntIncomeALLR, modelLongCycleTerEducIntALLF, type="text", header=FALSE, digits=2, multicolumn = FALSE, out="./table/summarymodelLongCycleEduc.html", title="Summary Statistics",
           notes = "All the commands and algorithms are coded in R 4.0.3")
 ```
+
+![](./Models.jpeg)
 
 
 ## Validity
@@ -318,15 +322,17 @@ Zafer, P., William, A. O., & Leslie, S. K. (2014). The Long-term Impact of Educa
 
 # Appendices 
 
-## Paths to be followed to retrieve data
+## Appendix 1
 
-### Independent variable:  
+### Paths to be followed to retrieve data
+
+#### Independent variable:  
 
 https://stats.oecd.org/Index.aspx?DataSetCode=EAG_FIN_SOURCE 
 
 Filters: countries in sample / years: 2013-2017 / ISC11: Primary education (ISCED2011 level 1) + Lower secondary education (ISCED2011 level 2) + Upper secondary education (ISCED2011 level 3) + Long cycle tertiary (ISCED2011 levels 6 to 8) / REF_SECTOR: all sectors / COUNTERPART_SECTOR: all public and private institutions / EXPENDITURE_TYPE: all expenditure types / UNIT_ MEASURE: USD Purchasing Power Parity 
 
-### Control variables: 
+#### Control variables: 
 
 GDP per head: 
 https://stats.oecd.org/Index.aspx?QueryId=54369 
@@ -347,9 +353,7 @@ Student-teacher ratio:
 https://stats.oecd.org/   
 Path: Education and training -> education at a glance -> teachers and the learning environment -> student-teacher ration and average class size. 
 
- 
-
-### Dependent variable: 
+#### Dependent variable: 
 
 https://stats.oecd.org/  
 Path: Education and training -> education at a glance -> educational attainment and outcomes-> educational attainment and labor force status-> Employment, unemployment and inactivity rate of 25-64 year-olds, by programme orientation 
