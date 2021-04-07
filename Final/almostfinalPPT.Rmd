@@ -4,15 +4,16 @@ author: "Anna Canestro, Serena Foini & Catherine Vanaise"
 date: "12/04/2021"
 output:
   beamer_presentation: default
-  slidy_presentation: default
   ioslides_presentation: default
+  slidy_presentation: default
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
 ```
 
 # Agenda
+
 1. Research Question
 2. Background
 3. Research Gap
@@ -31,23 +32,31 @@ knitr::opts_chunk$set(echo = FALSE)
 
 
 # Research Question 
+
 **How do government expenditures in different schooling levels impact on unemployment in OECD countries?**  
 
 
 # Background
 Unemployment levels are constantly under the spotlight of governments, as signals of the economic stability of countries and of the effectiveness of the policies they implement. It is conventionally believed that the acquisition of skills enhances the possibilities of getting hired (Grimaccia & Lima, 2013). Previous literature investigated three important relationships: 
 
-![](./Immagine2.png)
+<center>
+
+![](./images/images/TRIANGLE.png){width=280px}
+
+</center>
+
 
 
 
 # Research Gap 
+
 **A large gap in the literature is found regarding the division of these expenditures among the different educational levels.**
 
 1. It is not investigated whether and how investments in a particular level of education – primary, secondary or tertiary – provide greater benefit on the economy.
 2. The literature generally focuses more on specific-countries rather than cross-country studies.
 
 # Our Aim
+
 * To assess whether the expenditure in education is negatively correlated to unemployment levels. 
 * To study whether the impact of government expenditures in education on unemployment varies according to the destination of these expenditures – primary, lower and upper secondary, tertiary schooling. 
 * To better understand on which educational level governments should direct their investments to reach the best possible outcome for diminishing unemployment.
@@ -65,14 +74,17 @@ Unemployment levels are constantly under the spotlight of governments, as signal
 # Methodology 
 
 ## Sampling
+
 * Panel data gathered from the OECD.Stat. 
 * Focus on the period from 2013 to 2017. 
 * 26 countries out of 38 were included in our sample because of missing data. 
 * The sample allows for a cross country analysis.
 * Geographical heterogeneity maintained.   
 
+<center>
 
-![](./Table of countries.jpeg)
+![](./images/images/TABLE4.png)
+</center>
 
 # Variables
 ## Dependent Variable
@@ -97,9 +109,10 @@ Included as percentage of the GDP.
 
     + Number of students per teacher.
 
-# Variables 
+# Variables
 ## Categorical Variables
 ### Geographical categorization
+
 * South America
 * North America
 * Western Europe 
@@ -123,18 +136,23 @@ By GDP per capita quartiles.
 # Data Analysis
 
 ## Explanatory data analysis
+
 Panel data of 130 observations 
 PUT THE TABLE OF SUMMARY STATISTICS
 
 # Data Analysis
-![](./Models.jpeg)
+
+```{r, out.width = "100px", fig.align='center'}
+knitr::include_graphics("./images/Models.jpeg")
+```
+
 
 # Data Analysis
 ## Validity 
 
 ### Linearity 
 
-![](./Plot.jpeg)
+![](./images/Plot.jpeg)
 
 # Data Analysis
 ## Validity 
@@ -143,7 +161,7 @@ PUT THE TABLE OF SUMMARY STATISTICS
 
 
 
-![](./Residuals distribution.jpeg)
+![](./images/Residuals distribution.jpeg)
 
 
 # Data Analysis

@@ -2,11 +2,69 @@
 title: "Impact of Government Expenditure in Education on Unemployment"
 author: "Anna Canestro, Serena Foini & Catherine Vanaise"
 date: "12/04/2021"
-output: html_document
+output:
+  pdf_document:
+    latex_engine: xelatex
+    toc: yes
+    toc_depth: '2'
+    number_sections: yes
 ---
 
+<style>
+body {
+text-align: justify}
+</style>
+
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+```
+
+```{r, include=FALSE}
+library(gsheet)
+library(plm)
+library(tidyverse)
+
+mydata <- gsheet2tbl("https://docs.google.com/spreadsheets/d/1zcYomqhibeLyxaeTyJz8etOqUWqDLH_4/edit#gid=550557869")
+
+mydata <- mydata %>% mutate(primEducGdp = primEduc/gdp*100)
+mydata <- mydata %>% mutate(lowSecEducGdp = lowSecEduc/gdp*100)
+mydata <- mydata %>% mutate(upSecEducGdp = upSecEduc/gdp*100)
+mydata <- mydata %>% mutate(longCycleTerEducGdp = longCycleTerEduc/gdp*100)
+
+modelControlF <- plm(unemployment ~  avRatio + adultEducTer,
+             data = mydata, index = c("country", "year"), model = "within")
+modelLongCycleEducF <- plm(unemployment ~  avRatio + adultEducTer + longCycleTerEducGdp,
+             data = mydata, index = c("country", "year"), model = "within")
+
+mydata <- mydata %>% mutate(northAmerica = case_when(region == "North America" ~ 1
+                                                      , TRUE ~ 0))
+mydata <- mydata %>% mutate(southAmerica = case_when(region == "South America" ~ 1
+                                                      , TRUE ~ 0))
+mydata <- mydata %>% mutate(westernEurope = case_when(region == "Western" ~ 1
+                                                      , TRUE ~ 0))
+mydata <- mydata %>% mutate(easternEurope = case_when(region == "Eastern" ~ 1
+                                                      , TRUE ~ 0))
+mydata <- mydata %>% mutate(northernEurope = case_when(region == "Northern" ~ 1
+                                                      , TRUE ~ 0))
+mydata <- mydata %>% mutate(oceania = case_when(region == "Oceania" ~ 1
+                                                      , TRUE ~ 0))
+
+modelLongCycleTerEducIntALLF <- plm(unemployment ~  avRatio + adultEducTer + longCycleTerEducGdp*northAmerica + longCycleTerEducGdp*southAmerica + longCycleTerEducGdp*westernEurope + longCycleTerEducGdp*easternEurope + longCycleTerEducGdp*northernEurope + longCycleTerEducGdp*oceania,
+             data = mydata, index = c("country", "year"), model = "within")
+
+quantile(mydata$gdpph, probs = c(0, 0.25, 0.5, 0.75, 1))
+
+mydata$lowerMiddle<-0
+mydata$lowerMiddle[mydata$gdpph>=26725.25&mydata$gdpph<33643]<-1
+
+mydata$upperMiddle<-0
+mydata$upperMiddle[mydata$gdpph>=33643&mydata$gdpph<43618.75]<-1
+
+mydata$upper<-0
+mydata$upper[mydata$gdpph>=43618.75&mydata$gdpph<=87496]<-1
+
+modelLongCycleTerEducIntIncomeALLR <- plm(unemployment ~  avRatio + adultEducTer + longCycleTerEducGdp*lowerMiddle + longCycleTerEducGdp*upperMiddle + longCycleTerEducGdp*upper,
+             data = mydata, index = c("country", "year"), model = "random")
 ```
 
 # Introduction
@@ -126,9 +184,11 @@ In *table 1* a brief summary of our variables is presented, and some key charact
 
 Finally, we made a summary of the categorical variables. Concerning the distinction by income level, our 130 observations fall homogeneously in the four categories. Indeed, we had 33,32,32,33 observations for lower, lower-middle, upper-middle and upper income respectively. It is important to highlight that, since we considered a period of five years, some countries have experienced fluctuations of their income levels, measured by GDP per capita. Therefore, in some cases, they changed their categories from one year to another. For example, Italy was classified as lower-middle in 2013, 2014, 2015, 2016 and changed to upper-middle in 2017. As regard the geographical categorization, we had 9,1,1,4,2,1,8 countries in Eastern Europe, Middle East, North America, Northern Europe, Oceania, South America and Western Europe.  
 
-### Summary Statistics
+### Table 1: Summary Statistics
 
-*TABLE OF SUMMARY STATISTICS*
+```{r}
+summary(mydata[,c(3:16, 22:25)])
+```
 
 ## Modeling
 
@@ -150,59 +210,11 @@ Although only the long-cycle tertiary education models are shown here, models wi
 
 Finally, it was important to verify which of the three models better predicted the relationship we aimed to study. We therefore performed the Wald-test to compare nested models. For the comparison between the model with income categorization and the one with only expenditures in long-cycle tertiary education, the test gave us a p-value of 7.877e-06. This would suggest that adding the Income terms was valuable to the model. This may however be an effect of the constant being significant. Since our independent variable is not significant in this model, we cannot say the model is better. This model does not help us study the phenomenon at hand without independent variable significance. Concerning the test between the model with regional categorization and the one with only expenditures in long-cycle tertiary education, we obtained a p-value of 0.6741. Given the results obtained, we could conclude that, despite it including less variables, the model without a regional categorical variable is a better predictor of the relationship we wanted to investigate and that the model with the income categorical variable may be interesting to study under another context but does not show us the relationship we wish to study.
 
-```{r, include=FALSE}
-library(gsheet)
-library(plm)
-library(tidyverse)
-
-mydata <- gsheet2tbl("https://docs.google.com/spreadsheets/d/1zcYomqhibeLyxaeTyJz8etOqUWqDLH_4/edit#gid=550557869")
-
-mydata <- mydata %>% mutate(primEducGdp = primEduc/gdp*100)
-mydata <- mydata %>% mutate(lowSecEducGdp = lowSecEduc/gdp*100)
-mydata <- mydata %>% mutate(upSecEducGdp = upSecEduc/gdp*100)
-mydata <- mydata %>% mutate(longCycleTerEducGdp = longCycleTerEduc/gdp*100)
-
-modelControlF <- plm(unemployment ~  avRatio + adultEducTer,
-             data = mydata, index = c("country", "year"), model = "within")
-modelLongCycleEducF <- plm(unemployment ~  avRatio + adultEducTer + longCycleTerEducGdp,
-             data = mydata, index = c("country", "year"), model = "within")
-
-mydata <- mydata %>% mutate(northAmerica = case_when(region == "North America" ~ 1
-                                                      , TRUE ~ 0))
-mydata <- mydata %>% mutate(southAmerica = case_when(region == "South America" ~ 1
-                                                      , TRUE ~ 0))
-mydata <- mydata %>% mutate(westernEurope = case_when(region == "Western" ~ 1
-                                                      , TRUE ~ 0))
-mydata <- mydata %>% mutate(easternEurope = case_when(region == "Eastern" ~ 1
-                                                      , TRUE ~ 0))
-mydata <- mydata %>% mutate(northernEurope = case_when(region == "Northern" ~ 1
-                                                      , TRUE ~ 0))
-mydata <- mydata %>% mutate(oceania = case_when(region == "Oceania" ~ 1
-                                                      , TRUE ~ 0))
-
-modelLongCycleTerEducIntALLF <- plm(unemployment ~  avRatio + adultEducTer + longCycleTerEducGdp*northAmerica + longCycleTerEducGdp*southAmerica + longCycleTerEducGdp*westernEurope + longCycleTerEducGdp*easternEurope + longCycleTerEducGdp*northernEurope + longCycleTerEducGdp*oceania,
-             data = mydata, index = c("country", "year"), model = "within")
-
-quantile(mydata$gdpph, probs = c(0, 0.25, 0.5, 0.75, 1))
-
-mydata$lowerMiddle<-0
-mydata$lowerMiddle[mydata$gdpph>=26725.25&mydata$gdpph<33643]<-1
-
-mydata$upperMiddle<-0
-mydata$upperMiddle[mydata$gdpph>=33643&mydata$gdpph<43618.75]<-1
-
-mydata$upper<-0
-mydata$upper[mydata$gdpph>=43618.75&mydata$gdpph<=87496]<-1
-
-modelLongCycleTerEducIntIncomeALLR <- plm(unemployment ~  avRatio + adultEducTer + longCycleTerEducGdp*lowerMiddle + longCycleTerEducGdp*upperMiddle + longCycleTerEducGdp*upper,
-             data = mydata, index = c("country", "year"), model = "random")
-```
 
 ```{r, include=FALSE}
 library(lmtest)
 waldtest(modelLongCycleEducF, modelLongCycleTerEducIntIncomeALLR, test = "F")
 waldtest(modelLongCycleEducF, modelLongCycleTerEducIntALLF, test = "F")
-
 ```
 
 ### Table 2: Main Models
@@ -222,7 +234,11 @@ stargazer(modelControlF, modelLongCycleEducF, modelLongCycleTerEducIntIncomeALLR
           notes = "All the commands and algorithms are coded in R 4.0.3")
 ```
 
-![](./Models.jpeg)
+<center>
+
+![](./images/Models.jpeg)
+
+</center>
 
 
 ## Validity
@@ -324,4 +340,67 @@ Zafer, P., William, A. O., & Leslie, S. K. (2014). The Long-term Impact of Educa
 
 ## Appendix 1
 
-![](./appendix1.png)
+```{r, eval=FALSE, echo=TRUE}
+
+### Paths to be followed to retrieve data
+
+#### Independent variable:  
+
+https://stats.oecd.org/Index.aspx?DataSetCode=EAG_FIN_SOURCE 
+
+Filters: countries in sample / years: 2013-2017 / ISC11: Primary education 
+(ISCED2011 level 1) + Lower secondary education (ISCED2011 level 2) + 
+Upper secondary education (ISCED2011 level 3) + Long cycle tertiary 
+(ISCED2011 levels 6 to 8) / REF_SECTOR: all sectors / 
+COUNTERPART_SECTOR: all public and private institutions / 
+EXPENDITURE_TYPE: all expenditure types / UNIT_ MEASURE: 
+USD Purchasing Power Parity 
+
+#### Control variables: 
+
+GDP per head: 
+https://stats.oecd.org/Index.aspx?QueryId=54369 
+
+Path: Gross domestic product (GDP)  : GDP per head, US $, 
+constant prices, constant PPPs, reference year 2015
+
+Filters: countries in sample / years: 2013-2017 / 
+Measure: USD constant prices, 2015 PPPs 
+
+
+GDP:
+https://stats.oecd.org/Index.aspx?QueryId=54369
+
+Path: Gross domestic product (GDP)  : GDP, US $, 
+current prices, current PPPs, millions
+
+Filters: countries in sample / years: 2013-2017 /
+
+Educational attainment: 
+https://data.oecd.org/eduatt/adult-education-level.htm#indicator-chart 
+
+Path: Adult Education Level 
+
+Filters: countries in sample / Perspective: Tertiary / time: years: 2013-2017 
+
+Student-teacher ratio: 
+https://stats.oecd.org/   
+  
+Path: Education and training -> education at a glance -> 
+teachers and the learning environment -> 
+student-teacher ration and average class size. 
+
+#### Dependent variable: 
+
+Unemployment:
+https://stats.oecd.org/  
+  
+Path: Education and training -> education at a glance -> 
+educational attainment and outcomes-> educational attainment and 
+labor force status-> Employment, unemployment and inactivity rate of 
+25-64 year-olds, by programme orientation 
+
+Filters: indicator: unemployment / Reference year: 2013-2017 / age: 25-64 years 
+/ measure: value / ISCED 2011 A education level: All levels of education /
+countires in sample
+```
