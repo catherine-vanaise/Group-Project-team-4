@@ -39,11 +39,11 @@ knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
 # Background
 Unemployment levels are constantly under the spotlight of governments, as signals of the economic stability of countries and of the effectiveness of the policies they implement. It is conventionally believed that the acquisition of skills enhances the possibilities of getting hired (Grimaccia & Lima, 2013). Previous literature investigated three important relationships: 
 
-<center>
 
-![](./images/images/TRIANGLE.png){width=280px}
 
-</center>
+```{r, out.width = "200px", fig.align='center'}
+knitr::include_graphics("./images/TRIANGLE.png")
+```
 
 
 
@@ -81,10 +81,11 @@ Unemployment levels are constantly under the spotlight of governments, as signal
 * The sample allows for a cross country analysis.
 * Geographical heterogeneity maintained.   
 
-<center>
 
-![](./images/images/TABLE4.png)
-</center>
+```{r, out.width = "300px", fig.align='center'}
+knitr::include_graphics("./images/TABLE4.png")
+```
+
 
 # Variables
 ## Dependent Variable
@@ -138,11 +139,14 @@ By GDP per capita quartiles.
 ## Explanatory data analysis
 
 Panel data of 130 observations 
-PUT THE TABLE OF SUMMARY STATISTICS
+
+```{r, out.width = "300px", fig.align='center'}
+knitr::include_graphics("./images/EDA.png")
+```
 
 # Data Analysis
 
-```{r, out.width = "100px", fig.align='center'}
+```{r, out.width = "190px", fig.align='center'}
 knitr::include_graphics("./images/Models.jpeg")
 ```
 
@@ -152,17 +156,18 @@ knitr::include_graphics("./images/Models.jpeg")
 
 ### Linearity 
 
-![](./images/Plot.jpeg)
+```{r, out.width = "250px", fig.align='center'}
+knitr::include_graphics("./images/Plot.jpeg")
+```
 
 # Data Analysis
 ## Validity 
 
 ### Distribution of residuals
 
-
-
-![](./images/Residuals distribution.jpeg)
-
+```{r, out.width = "250px", fig.align='center'}
+knitr::include_graphics("./images/Residuals distribution.jpeg")
+```
 
 # Data Analysis
 ## Validity 

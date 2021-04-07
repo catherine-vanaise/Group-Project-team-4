@@ -187,7 +187,7 @@ Finally, we made a summary of the categorical variables. Concerning the distinct
 ### Table 1: Summary Statistics
 
 ```{r}
-summary(mydata[,c(3:16, 22:25)])
+summary(mydata[,c(9:16, 22:25)])
 ```
 
 ## Modeling
@@ -264,7 +264,6 @@ abline(m1)
 
 ```{r}
 hist(modelLongCycleEducF$residuals, main = "", xlab= "Residuals of Long Cycle Tertiary Education Model")
-
 ```
 
 ```{r, include=FALSE}
@@ -359,9 +358,10 @@ USD Purchasing Power Parity
 #### Control variables: 
 
 GDP per head: 
-https://stats.oecd.org/Index.aspx?QueryId=54369 
+https://stats.oecd.org/
 
-Path: Gross domestic product (GDP)  : GDP per head, US $, 
+Path: National Accounts-> annual national accounts -> main aggregates
+-> 1.Gross domestic product (GDP) -> GDP per head, US $, 
 constant prices, constant PPPs, reference year 2015
 
 Filters: countries in sample / years: 2013-2017 / 
@@ -369,12 +369,13 @@ Measure: USD constant prices, 2015 PPPs
 
 
 GDP:
-https://stats.oecd.org/Index.aspx?QueryId=54369
+https://stats.oecd.org/
 
-Path: Gross domestic product (GDP)  : GDP, US $, 
-current prices, current PPPs, millions
+Path: National Accounts-> annual national accounts -> main aggregates
+-> 1.Gross domestic product (GDP)  -> GDP, US $, current prices, current PPPs,
+millions
 
-Filters: countries in sample / years: 2013-2017 /
+Filters: countries in sample / years: 2013-2017
 
 Educational attainment: 
 https://data.oecd.org/eduatt/adult-education-level.htm#indicator-chart 
@@ -390,6 +391,14 @@ Path: Education and training -> education at a glance ->
 teachers and the learning environment -> 
 student-teacher ration and average class size. 
 
+Filters: level of education: Primary education (ISCED2011 level 1) +
+Lower secondary education (ISCED2011 level 2) +
+Upper secondary education (ISCED2011 level 3) +
+ISCED2011 levels 6 to 8 / indicator:  Ratio of students to teaching staff 
+by type of institutions / reference sector:   All public and private educational 
+institutions /countries in sample / year: 2013-2017 
+
+
 #### Dependent variable: 
 
 Unemployment:
@@ -402,5 +411,5 @@ labor force status-> Employment, unemployment and inactivity rate of
 
 Filters: indicator: unemployment / Reference year: 2013-2017 / age: 25-64 years 
 / measure: value / ISCED 2011 A education level: All levels of education /
-countires in sample
+countries in sample
 ```
