@@ -91,9 +91,10 @@ knitr::include_graphics("./images/TABLE4.png")
 ## Dependent Variable
 Level of unemployment
 
-  + Measured as the percentage of the population aged between 24 and 64 years of age that is without employment.  
+  + Measured as the percentage of the population between 24 and 64 years of age that is without employment.  
 
-## Independent Variable
+## Independent Variables
+
 1. The level of total expenditure in primary education (ISCED2011 level 1); 
 2. The level of total expenditure in lower secondary education (ISCED2011 level 2); 
 3. The level of total expenditure in upper secondary education (ISCED2011 level 3); 
@@ -103,6 +104,7 @@ Included as percentage of the GDP.
 
 # Variables
 ## Control Variables
+
 1. Educational attainment
 
     + Percentage of university graduates in the population aged 25-64.
@@ -172,27 +174,31 @@ knitr::include_graphics("./images/Residuals distribution.jpeg")
 # Data Analysis
 ## Validity 
 ### Residuals Homoskedasticity 
+
 Breusch-Pagan p-value of 2.2e-16. 
 
 # Discussion
+
 **None of our initial hypotheses can be accepted.** 
-Data only highlight a significant and—opposite from what expected—positive relationship between long-cycle tertiary education expenditures and unemployment rates. 
+Data only highlighted a significant and—opposite from what expected—positive relationship between long-cycle tertiary education expenditures and unemployment rates. 
 
 ## What does it mean? 
 1. The effects of investments in lower grades of schooling are not directly captured by unemployment levels. 
 
 2. The positive relationship between unemployment rates and outlays in long-cycle tertiary education might appear counter-intuitive. 
     + Countries spending more in higher education form more educated individuals
-    + Upward pressure to labour supply 
+    + Upward pressure on labour supply 
     + Labour surplus leads to an increase in unemployment rates if not matched by a sufficient labour demand
 
 # Conclusions
 ## Limitations
+
 1. Limited sample (size and period)
 2. Income distribution
 3. General definition of unemployment rate
 
 ## Further Research
+
 1. Broadening the time frame
 2. Considering a greater sample of countries—from various regions and with different levels of income
 3. Considering as a dependent variable a smaller percentage of the working population
