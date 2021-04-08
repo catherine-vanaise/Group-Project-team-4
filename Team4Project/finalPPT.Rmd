@@ -33,7 +33,7 @@ knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
 
 # Research Question 
 
-**How do government expenditures in different schooling levels impact on unemployment in OECD countries?**  
+**How do government expenditures in different schooling levels impact unemployment in OECD countries?**  
 
 
 # Background
