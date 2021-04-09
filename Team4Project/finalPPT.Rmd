@@ -91,7 +91,7 @@ knitr::include_graphics("./images/TABLE4.png")
 ## Dependent Variable
 Level of unemployment
 
-  + Measured as the percentage of the population between 24 and 64 years of age that is without employment.  
+  + Measured as the percentage of the population between 25 and 64 years of age that is without employment.  
 
 ## Independent Variables
 
